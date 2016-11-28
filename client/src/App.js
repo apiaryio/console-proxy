@@ -3,6 +3,15 @@ import classNames from 'classnames';
 import logo from './logo.svg';
 import './App.css';
 
+
+let apiBaseUrl = '';
+let iframeBaseUrl = 'http://localhost:3001';
+
+if (process.env.NODE_ENV === 'production') {
+  apiBaseUrl = 'https://apiarycustomerseed.herokuapp.com';
+  iframeBaseUrl = 'https://apiarycustomerseed.herokuapp.com';
+}
+
 class App extends Component {
 
   get requestOptions() {
@@ -22,7 +31,7 @@ class App extends Component {
   }
 
   requestDataWithHttp = () => {
-    fetch('/api/users/Vincenzo', this.requestOptions)
+    fetch(`${apiBaseUrl}/api/users/Vincenzo`, this.requestOptions)
       .then(res => Promise.all([res.headers, res.json()]))
       .then(([headers, body]) => {
 
@@ -40,7 +49,7 @@ class App extends Component {
   requestDataWithIframe = () => {
     this.channel.port1.postMessage(
       JSON.stringify({
-        url: '/api/users/Vincenzo',
+        url: `${apiBaseUrl}api/users/Vincenzo`,
         requestOptions: this.requestOptions
       })
     );
@@ -61,7 +70,7 @@ class App extends Component {
     return (
       <div className="App">
         <iframe
-          src="http://localhost:3001/serve-seed.html"
+          src={`${iframeBaseUrl}/serve-seed.html`}
           height="0"
           width="0"
           frameBorder="0"
