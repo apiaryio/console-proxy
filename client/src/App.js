@@ -23,8 +23,17 @@ class App extends Component {
 
   requestDataWithHttp = () => {
     fetch('/api/users/Vincenzo', this.requestOptions)
-      .then(res => res.json())
-      .then(data => this.setState(data))
+      .then(res => Promise.all([res.headers, res.json()]))
+      .then(([headers, body]) => {
+
+        let h = {};
+
+        for (var header of headers) {
+          h[header[0]] = header[1];
+        }
+
+        this.setState({headers: h, body});
+      })
       .then(undefined, (err) => console.error(err));
   }
 
@@ -68,10 +77,13 @@ class App extends Component {
         </p>
         <button className="App-button" onClick={this.requestDataWithHttp}>Call me with regular Http!</button>
         <button className="App-button" onClick={this.requestDataWithIframe}>Call me using the iframe!</button>
-
-        {this.state &&
-          Object.keys(this.state).map((key) => {
-            return <pre key={key}>{key}: {this.state[key]}</pre>
+        {this.state && ['headers', 'body'].map((k) => {
+          return (<div key={k}>
+            <p>{k}</p>
+            {this.state[k] && Object.keys(this.state[k]).map((key) => {
+                return <pre key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
+              })}
+          </div>);
           })
         }
       </div>
