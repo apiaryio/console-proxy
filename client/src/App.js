@@ -5,12 +5,8 @@ import './App.css';
 
 class App extends Component {
 
-  componentWillUnmount() {
-    this.iframe.removeEventListener('load', this.iframeLoaded);
-  }
-
-  requestDataWithHttp = () => {
-    fetch('/api/users/Vincenzo', {
+  get requestOptions() {
+    return {
       method: 'POST',
       body: JSON.stringify({
         nickname: 'vncz'
@@ -18,27 +14,38 @@ class App extends Component {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
-    })
+    };
+  }
+
+  componentWillUnmount() {
+    this.iframe.removeEventListener('load', this.iframeLoaded);
+  }
+
+  requestDataWithHttp = () => {
+    fetch('/api/users/Vincenzo', this.requestOptions)
       .then(res => res.json())
       .then(data => this.setState(data))
       .then(undefined, (err) => console.error(err));
   }
 
   requestDataWithIframe = () => {
-    fetch('/api/users/Vincenzo')
-      .then(res => res.json())
-      .then(data => this.setState(data))
-      .then(undefined, (err) => console.error(err));
+    this.channel.port1.postMessage(
+      JSON.stringify({
+        url: '/api/users/Vincenzo',
+        requestOptions: this.requestOptions
+      })
+    );
   }
 
 
   handleIFrameMessage = (e) => {
-    alert(e.data);
+    this.setState(e.data);
   }
 
   iframeLoaded = () => {
     this.channel = new MessageChannel();
     this.channel.port1.onmessage = this.handleIFrameMessage;
+    this.iframe.contentWindow.postMessage('port', '*', [this.channel.port2]);
   }
 
   render() {
@@ -49,7 +56,7 @@ class App extends Component {
           height="0"
           width="0"
           frameBorder="0"
-          ref={(iframe) => {if (iframe) {this.iframe = iframe; iframe.addEventListener('load', this.iframeLoaded ,false);}}}
+          ref={(iframe) => { if (iframe) { this.iframe = iframe; iframe.addEventListener('load', this.iframeLoaded, false); } } }
           >
         </iframe>
         <div className="App-header">
