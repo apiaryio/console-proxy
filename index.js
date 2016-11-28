@@ -11,4 +11,8 @@ app.get('/api/users/:user', (req, res) => {
   });
 });
 
+app.use(express.static('./', {
+  extensions: ['html']
+}));
+
 app.listen(process.env.PORT || 3001);
