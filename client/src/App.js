@@ -11,9 +11,9 @@ class App extends Component {
       body: JSON.stringify({
         nickname: 'vncz'
       }),
-      headers: new Headers({
+      headers: {
         'Content-Type': 'application/json'
-      })
+      }
     };
   }
 
