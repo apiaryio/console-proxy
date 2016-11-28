@@ -13,6 +13,11 @@ html {
   height: 80px;
 }
 
+.App-logo--loaded {
+  animation-duration: 1s;
+}
+
+
 .App-header {
   background-color: #222;
   height: 150px;

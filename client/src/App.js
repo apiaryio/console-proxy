@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import logo from './logo.svg';
 import './App.css';
 
@@ -15,7 +16,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className={classNames('App-logo', {'App-logo--loaded': this.state})} alt="logo" />
           <h2>Hello, I am the Apiary Console</h2>
         </div>
         <p className="App-intro">
