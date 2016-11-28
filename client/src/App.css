@@ -1,3 +1,9 @@
+html {
+  font-family: proxima-nova,"Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+  box-sizing: border-box;
+  border: none;
+}
+
 .App {
   text-align: center;
 }
@@ -16,6 +22,16 @@
 
 .App-intro {
   font-size: large;
+}
+
+.App-button {
+  font-size: 24px;
+  color: #fafafa;
+  background: #cc7a6f;
+  border-radius: 4px;
+  padding: 8px 16px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  font-weight: 400;
 }
 
 @keyframes App-logo-spin {
