@@ -5,6 +5,10 @@ import './App.css';
 
 class App extends Component {
 
+  componentWillUnmount() {
+    this.iframe.removeEventListener('load', this.iframeLoaded);
+  }
+
   handleClick = () => {
     fetch('/api/users/Vincenzo')
       .then(res => res.json())
@@ -12,12 +16,14 @@ class App extends Component {
       .then(undefined, (err) => console.error(err));
   }
 
-  componentWillUnmount() {
-    this.iframe.removeEventListener('load', this.iframeLoaded)
+  handleIFrameMessage = (e) => {
+    alert(e.data);
   }
 
-  iframeLoaded() {
-
+  iframeLoaded = () => {
+    this.channel = new MessageChannel();
+    this.channel.port1.onmessage = this.handleIFrameMessage;
+    this.iframe.contentWindow.postMessage('init', '*', [this.channel.port2]);
   }
 
   render() {
