@@ -4,12 +4,13 @@ import './App.css';
 
 class App extends Component {
 
-  handleClick() {
-    fetch('/api/data1')
+  handleClick = () => {
+    fetch('/api/users/Vincenzo')
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => this.setState(data))
       .then(undefined, (err) => console.error(err));
   }
+
   render() {
     return (
       <div className="App">
@@ -20,7 +21,13 @@ class App extends Component {
         <p className="App-intro">
           Sit down and try to call the console with our own super server
         </p>
-        <button className="App-button">Call me maybe!</button>
+        <button className="App-button" onClick={this.handleClick}>Call me maybe!</button>
+
+        {this.state &&
+          Object.keys(this.state).map((key) => {
+            return <p><pre>{key}: {this.state[key]}</pre></p>
+          })
+        }
       </div>
     );
   }

@@ -9,6 +9,6 @@ app.get('/api/users/:user', (req, res) => {
     surname: 'Chianese',
     age: 27 // Ahi Ahi, getting older
   });
-})
+});
 
-app.listen(process.env.PORT || 3001)
+app.listen(process.env.PORT || 3001);
