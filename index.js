@@ -1,14 +1,17 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
-app.get('/api/users/:user', (req, res) => {
-  return res.json({
+app.use(bodyParser.json());
+
+app.post('/api/users/:user', (req, res) => {
+  return res.json(Object.assign({
     id: req.params.id,
     name: 'Vincenzo',
     surname: 'Chianese',
     age: 27 // Ahi Ahi, getting older
-  });
+  }, req.body));
 });
 
 app.use(express.static('./', {

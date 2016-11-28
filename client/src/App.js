@@ -9,12 +9,28 @@ class App extends Component {
     this.iframe.removeEventListener('load', this.iframeLoaded);
   }
 
-  handleClick = () => {
+  requestDataWithHttp = () => {
+    fetch('/api/users/Vincenzo', {
+      method: 'POST',
+      body: JSON.stringify({
+        nickname: 'vncz'
+      }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+      .then(res => res.json())
+      .then(data => this.setState(data))
+      .then(undefined, (err) => console.error(err));
+  }
+
+  requestDataWithIframe = () => {
     fetch('/api/users/Vincenzo')
       .then(res => res.json())
       .then(data => this.setState(data))
       .then(undefined, (err) => console.error(err));
   }
+
 
   handleIFrameMessage = (e) => {
     alert(e.data);
@@ -23,7 +39,6 @@ class App extends Component {
   iframeLoaded = () => {
     this.channel = new MessageChannel();
     this.channel.port1.onmessage = this.handleIFrameMessage;
-    this.iframe.contentWindow.postMessage('init', '*', [this.channel.port2]);
   }
 
   render() {
@@ -44,7 +59,8 @@ class App extends Component {
         <p className="App-intro">
           Sit down and try to call the console with our own super server
         </p>
-        <button className="App-button" onClick={this.handleClick}>Call me maybe!</button>
+        <button className="App-button" onClick={this.requestDataWithHttp}>Call me with regular Http!</button>
+        <button className="App-button" onClick={this.requestDataWithIframe}>Call me using the iframe!</button>
 
         {this.state &&
           Object.keys(this.state).map((key) => {
