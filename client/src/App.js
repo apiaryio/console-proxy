@@ -12,11 +12,27 @@ class App extends Component {
       .then(undefined, (err) => console.error(err));
   }
 
+  componentWillUnmount() {
+    this.iframe.removeEventListener('load', this.iframeLoaded)
+  }
+
+  iframeLoaded() {
+
+  }
+
   render() {
     return (
       <div className="App">
+        <iframe
+          src="http://localhost:3001/serve-seed.html"
+          height="0"
+          width="0"
+          frameBorder="0"
+          ref={(iframe) => {if (iframe) {this.iframe = iframe; iframe.addEventListener('load', this.iframeLoaded ,false);}}}
+          >
+        </iframe>
         <div className="App-header">
-          <img src={logo} className={classNames('App-logo', {'App-logo--loaded': this.state})} alt="logo" />
+          <img src={logo} className={classNames('App-logo', { 'App-logo--loaded': this.state })} alt="logo" />
           <h2>Hello, I am the Apiary Console</h2>
         </div>
         <p className="App-intro">
@@ -26,7 +42,7 @@ class App extends Component {
 
         {this.state &&
           Object.keys(this.state).map((key) => {
-            return <p><pre>{key}: {this.state[key]}</pre></p>
+            return <pre key={key}>{key}: {this.state[key]}</pre>
           })
         }
       </div>
