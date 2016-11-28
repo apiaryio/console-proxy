@@ -49,7 +49,7 @@ class App extends Component {
   requestDataWithIframe = () => {
     this.channel.port1.postMessage(
       JSON.stringify({
-        url: `${apiBaseUrl}api/users/Vincenzo`,
+        url: `${apiBaseUrl}/api/users/Vincenzo`,
         requestOptions: this.requestOptions
       })
     );
