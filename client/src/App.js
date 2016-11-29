@@ -88,7 +88,7 @@ class App extends Component {
         <button className="App-button" onClick={this.requestDataWithIframe}>Call me using the iframe!</button>
         {this.state && ['headers', 'body'].map((k) => {
           return (<div key={k}>
-            <p>{k}</p>
+            <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
             {this.state[k] && Object.keys(this.state[k]).map((key) => {
                 return <pre key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
               })}
