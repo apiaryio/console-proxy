@@ -1,7 +1,14 @@
 let port = undefined
 
-const onPortMessage = function (e) {
-  const data = JSON.parse(e.data);
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://localhost:3000',
+  'http://apiary-console.surge.sh',
+  'https://apiary-console.surge.sh'
+];
+
+const onPortMessage = function (event) {
+  const data = JSON.parse(event.data);
 
   fetch(data.url, data.requestOptions)
       .then(response => {
@@ -31,9 +38,9 @@ const onPortMessage = function (e) {
 
 }
 
-onmessage = function (e) {
-  if (e.data === 'port') {
-    port = e.ports[0];
+onmessage = function (event) {
+  if (allowedOrigins.includes(event.origin) && event.data === 'port') {
+    port = event.ports[0];
     port.onmessage = onPortMessage;
   }
 }

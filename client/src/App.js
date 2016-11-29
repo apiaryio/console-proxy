@@ -72,7 +72,7 @@ class App extends Component {
   iframeLoaded = () => {
     this.channel = new MessageChannel();
     this.channel.port1.onmessage = this.handleIFrameMessage;
-    this.iframe.contentWindow.postMessage('port', '*', [this.channel.port2]);
+    this.iframe.contentWindow.postMessage('port', iframeBaseUrl, [this.channel.port2]);
   }
 
   render() {
@@ -83,7 +83,7 @@ class App extends Component {
           height="0"
           width="0"
           frameBorder="0"
-          sandbox="allow-scripts"
+          sandbox="allow-scripts allow-same-origin"
           ref={(iframe) => { if (iframe) { this.iframe = iframe; iframe.addEventListener('load', this.iframeLoaded, false); } } }
           >
         </iframe>
