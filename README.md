@@ -70,10 +70,14 @@ want to send on the wire is serialisable. I should verify that.
 4. Also - I'm assuming all errors and responses that are coming from the
 Http server are serialisable as well. If not, we're screwed up.
 
-5. I didn't make any security considerations (yet). I'll work on these once
-the examples will work.
+5. Guess what? There are no tests. Such **TDD**
 
-6. Guess what? There are no tests. Such **TDD**
+## Security considerations
+1. [Subresource Integrity][6]
+
+2. Verified `iframe` origin
+
+3. Always verify the syntax of the received message (it's done for us by [JSChannel][3])
 
 ## Interesting links
 
@@ -84,3 +88,4 @@ the examples will work.
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API
 [4]: https://github.com/mozilla/jschannel
 [5]: https://github.com/wix/jschannel
+[6]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
