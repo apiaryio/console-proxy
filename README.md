@@ -75,6 +75,12 @@ the examples will work.
 
 6. Guess what? There are no tests. Such **TDD**
 
+## Interesting links
+
+[JSChannel][4] by Mozilla and its [npmised improved version][5]
+
 [1]: https://github.com/apiaryio/apiary-console-seed/blob/master/serve-seed.ejs
 [2]: https://github.com/apiaryio/apiary-console-seed/blob/master/client/public/apiary-customer-seed.js
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API
+[4]: https://github.com/mozilla/jschannel
+[5]: https://github.com/wix/jschannel
