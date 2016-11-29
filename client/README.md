@@ -1,1 +1,0 @@
-# Apiary Console Seed Client
