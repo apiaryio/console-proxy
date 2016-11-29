@@ -83,6 +83,7 @@ class App extends Component {
           height="0"
           width="0"
           frameBorder="0"
+          sandbox="allow-scripts"
           ref={(iframe) => { if (iframe) { this.iframe = iframe; iframe.addEventListener('load', this.iframeLoaded, false); } } }
           >
         </iframe>
