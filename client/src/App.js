@@ -37,7 +37,7 @@ class App extends Component {
 
         let h = {};
 
-        for (var header of headers) {
+        for (let header of headers) {
           h[header[0]] = header[1];
         }
 

@@ -1,7 +1,7 @@
-port = undefined
+let port = undefined
 
-onPortMessage = function (e) {
-  data = JSON.parse(e.data);
+const onPortMessage = function (e) {
+  const data = JSON.parse(e.data);
 
   fetch(data.url, data.requestOptions)
     .then(res => Promise.all([res.headers, res.json()]))
@@ -9,14 +9,14 @@ onPortMessage = function (e) {
 
       let h = {};
 
-      for (var header of headers) {
+      for (let header of headers) {
         h[header[0]] = header[1];
       }
 
       port.postMessage({ headers: h, body });
     })
     .then(undefined, (err) => {
-      console.error(err);
+      console.error(`Apiary iFrame error: ${err}`);
       port.postMessage(err);
     });
 
