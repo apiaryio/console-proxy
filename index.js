@@ -4,10 +4,17 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(cors());
 app.set('view engine', 'ejs');
 app.set('views', './')
+
+app.get('/serve-seed.html', (req, res) => {
+  res.render('./serve-seed.ejs', {
+    url: process.env.APIARY_SEED_URL || 'http://localhost:3000'
+  });
+});
+
+app.use(bodyParser.json());
+app.use(cors());
 
 app.post('/api/users/:user', (req, res) => {
   return res.json(Object.assign({
@@ -18,10 +25,5 @@ app.post('/api/users/:user', (req, res) => {
   }, req.body));
 });
 
-app.get('/serve-seed.html', (req, res) => {
-  res.render('./serve-seed.ejs', {
-    url: process.env.APIARY_SEED_URL || 'http://localhost:3000'
-  });
-});
 
 app.listen(process.env.PORT || 3001);
