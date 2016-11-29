@@ -4,7 +4,16 @@ const onPortMessage = function (e) {
   const data = JSON.parse(e.data);
 
   fetch(data.url, data.requestOptions)
-    .then(res => Promise.all([res.headers, res.json()]))
+      .then(response => {
+        let content = null;
+        if (response.headers.get('Content-Type').includes('application/json')) {
+          content = response.json();
+        } else {
+          content = response.text();
+        }
+
+        return Promise.all([response.headers, content]);
+      })
     .then(([headers, body]) => {
 
       let h = {};

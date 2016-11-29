@@ -32,7 +32,16 @@ class App extends Component {
 
   requestDataWithHttp = () => {
     fetch(`${apiBaseUrl}/api/users/Vincenzo`, this.requestOptions)
-      .then(res => Promise.all([res.headers, res.json()]))
+      .then(response => {
+        let content = null;
+        if (response.headers.get('Content-Type').includes('application/json')) {
+          content = response.json();
+        } else {
+          content = response.text();
+        }
+
+        return Promise.all([response.headers, content]);
+      })
       .then(([headers, body]) => {
 
         let h = {};
@@ -41,7 +50,7 @@ class App extends Component {
           h[header[0]] = header[1];
         }
 
-        this.setState({headers: h, body});
+        this.setState({ headers: h, body });
       })
       .then(undefined, (err) => console.error(err.message || err));
   }
@@ -90,10 +99,10 @@ class App extends Component {
           return (<div key={k}>
             <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
             {this.state[k] && Object.keys(this.state[k]).map((key) => {
-                return <pre key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
-              })}
+              return <pre key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
+            })}
           </div>);
-          })
+        })
         }
       </div>
     );
