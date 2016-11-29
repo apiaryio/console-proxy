@@ -96,12 +96,16 @@ class App extends Component {
         <button className="App-button" onClick={this.requestDataWithHttp}>Call me with regular Http!</button>
         <button className="App-button" onClick={this.requestDataWithIframe}>Call me using the iframe!</button>
         {this.state && ['headers', 'body'].map((k) => {
-          return (<div key={k}>
-            <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
-            {this.state[k] && Object.keys(this.state[k]).map((key) => {
-              return <pre key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
-            })}
-          </div>);
+          return (
+            typeof(this.state[k]) !== 'string' ?
+              <div key={k}>
+                <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
+                {this.state[k] && Object.keys(this.state[k]).map((key) => {
+                  return <pre key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
+                })}
+            </div>
+            : <div key={k}><p>{k}</p><pre>{this.state[k]}</pre></div>
+          );
         })
         }
       </div>
