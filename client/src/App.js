@@ -43,7 +43,7 @@ class App extends Component {
 
         this.setState({headers: h, body});
       })
-      .then(undefined, (err) => console.error(err));
+      .then(undefined, (err) => console.error(err.message || err));
   }
 
   requestDataWithIframe = () => {

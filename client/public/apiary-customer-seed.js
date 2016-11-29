@@ -16,8 +16,8 @@ const onPortMessage = function (e) {
       port.postMessage({ headers: h, body });
     })
     .then(undefined, (err) => {
-      console.error(`Apiary iFrame error: ${err}`);
-      port.postMessage(err);
+      console.error(`Apiary iFrame error: ${err.message || err}`);
+      port.postMessage(err.message || err);
     });
 
 }
