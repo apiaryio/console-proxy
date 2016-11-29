@@ -13,9 +13,12 @@ onPortMessage = function (e) {
         h[header[0]] = header[1];
       }
 
-      port.postMessage({headers: h, body});
+      port.postMessage({ headers: h, body });
     })
-    .then(undefined, (err) => port.postMessage(err));
+    .then(undefined, (err) => {
+      console.error(err);
+      port.postMessage(err);
+    });
 
 }
 
