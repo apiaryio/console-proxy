@@ -7,14 +7,11 @@ machine:
   node:
     version: 7.2.0
   post:
-    npm install -g npm@latest
+    - npm install -g npm@latest
 
   hosts:
     apiary-console.surge.sh: 127.0.0.1
     apiarycustomerseed.herokuapp.com: 127.0.0.1
-
-  environment:
-    PORT: 80
 
 checkout:
   post:

@@ -1,15 +1,22 @@
-
 describe('The most basic test', () => {
   it('http click', () => {
-    browser.debug();
-    browser.url('https://apiary-console.surge.sh');
+    browser.url('http://apiary-console.surge.sh:3000');
     browser.leftClick('.httpCall');
-    browser.waitForExist('.headers');
-    browser.waitForExist('.body');
+    browser.waitForExist('.detail_headers');
+    browser.waitForExist('.detail_body');
 
-    const headersCount = Object.keys(browser.elements('.detail_headers').value).length;
-    const bodyCount = Object.keys(browser.elements('.detail_body').value).length;
+    const httpHeadersCount = Object.keys(browser.elements('.detail_headers').value).length;
+    const httpBodyCount = Object.keys(browser.elements('.detail_body').value).length;
 
-    expect(headersCount).toBe(bodyCount);
+    browser.leftClick('.iframeCall');
+    browser.waitForExist('.detail_headers');
+    browser.waitForExist('.detail_body');
+
+    const iframeHeadersCount = Object.keys(browser.elements('.detail_headers').value).length;
+    const iframeBodyCount = Object.keys(browser.elements('.detail_body').value).length;
+
+    expect(iframeHeadersCount).toBeGreaterThanOrEqual(httpHeadersCount);
+    expect(iframeBodyCount).toBeGreaterThanOrEqual(httpBodyCount);
+
   });
 });

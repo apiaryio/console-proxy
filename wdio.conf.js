@@ -1,13 +1,12 @@
 exports.config = {
   specs: [
-    '*.test.js'
+      '*.test.js'
   ],
   exclude: [
   ],
-  maxInstances: 10,
   capabilities: [{
-    maxInstances: 5,
-    browserName: 'chrome'
+      maxInstances: 1,
+      browserName: 'chrome'
   }],
   sync: true,
   logLevel: 'silent',
@@ -26,7 +25,7 @@ exports.config = {
   },
   jasmineNodeOpts: {
     defaultTimeoutInterval: 10000,
-    expectationResultHandler: function (passed, assertion) {
+    expectationResultHandler: function(passed, assertion) {
     }
   },
 }
