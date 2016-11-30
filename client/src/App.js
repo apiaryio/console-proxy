@@ -94,15 +94,15 @@ class App extends Component {
         <p className="App-intro">
           Sit down and try to call the console with our own super server
         </p>
-        <button className="App-button" onClick={this.requestDataWithHttp}>Call me with regular Http!</button>
-        <button className="App-button" onClick={this.requestDataWithIframe}>Call me using the iframe!</button>
+        <button className="App-button httpCall" onClick={this.requestDataWithHttp}>Call me with regular Http!</button>
+        <button className="App-button iframeCall" onClick={this.requestDataWithIframe}>Call me using the iframe!</button>
         {this.state && ['headers', 'body'].map((k) => {
           return (
             typeof(this.state[k]) !== 'string' ?
               <div key={k}>
                 <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
                 {this.state[k] && Object.keys(this.state[k]).map((key) => {
-                  return <pre key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
+                  return <pre className={`detail_${k}`} key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
                 })}
             </div>
             : <div key={k}><p>{k}</p><pre>{this.state[k]}</pre></div>
