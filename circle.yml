@@ -9,10 +9,6 @@ machine:
   post:
     - npm install -g npm@latest
 
-  hosts:
-    apiary-console.surge.sh: 127.0.0.1
-    apiarycustomerseed.herokuapp.com: 127.0.0.1
-
 checkout:
   post:
     - cd client && echo 'NODE_ENV=production' > .env && npm install
