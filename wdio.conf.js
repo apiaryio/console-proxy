@@ -1,18 +1,18 @@
 exports.config = {
   specs: [
-      '*.test.js'
+    '*.test.js'
   ],
   exclude: [
   ],
   capabilities: [{
-      maxInstances: 1,
-      browserName: 'chrome'
+    maxInstances: 1,
+    browserName: 'chrome'
   }],
   sync: true,
   logLevel: 'silent',
   coloredLogs: true,
   screenshotPath: './errorShots/',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: process.env.CI ? 'http://apiary-console.surge.sh:3000' : 'http://localhost:3000',
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
@@ -25,7 +25,7 @@ exports.config = {
   },
   jasmineNodeOpts: {
     defaultTimeoutInterval: 10000,
-    expectationResultHandler: function(passed, assertion) {
+    expectationResultHandler: function (passed, assertion) {
     }
   },
 }

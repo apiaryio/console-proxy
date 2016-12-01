@@ -1,6 +1,6 @@
 describe('The most basic test', () => {
   it('http click', () => {
-    browser.url('http://apiary-console.surge.sh:3000');
+    browser.url('/');
     browser.leftClick('.httpCall');
     browser.waitForExist('.detail_headers');
     browser.waitForExist('.detail_body');

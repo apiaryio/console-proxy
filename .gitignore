@@ -6,6 +6,7 @@ node_modules
 # testing
 coverage
 integration
+errorShots
 
 # production
 build
