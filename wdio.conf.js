@@ -7,25 +7,9 @@ exports.config = {
   ],
   capabilities: [{
     browserName: 'chrome',
-    version: 53
-  }, {
-    browserName: 'firefox',
-    version: 50
-  }, {
-    browserName: 'safari',
-    version: 10
-  }, {
-    browserName: 'microsoftedge',
-    version: 14
+    version: '54.0',
+    platform: 'OS X 10.11'
   }],
-  services: ['sauce'],
-  user: process.env.SAUCE_USERNAME,
-  key: process.env.SAUCE_ACCESS_KEY,
-  sauceConnect: true,
-  sauceConnectOpts: {
-    tunnelIdentifier: 'apiary-console-seed-tunnel',
-    dns: '8.8.8.8'
-  },
   sync: true,
   logLevel: 'silent',
   coloredLogs: true,
