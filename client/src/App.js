@@ -3,13 +3,15 @@ import classNames from 'classnames';
 import logo from './logo.svg';
 import './App.css';
 
-
-let apiBaseUrl = 'http://localhost:3000';
-let iframeBaseUrl = 'http://localhost:3001';
+/*
+  Yeah I know, not really a great way to set the things here.
+ */
+let baseUrl = 'http://localhost:3001';
 
 if (process.env.NODE_ENV === 'production') {
-  apiBaseUrl = 'https://apiarycustomerseed.herokuapp.com';
-  iframeBaseUrl = 'https://apiarycustomerseed.herokuapp.com';
+  baseUrl = 'https://apiarycustomerseed.herokuapp.com';
+} else if (process.env.NODE_ENV === 'CI') {
+  baseUrl = 'https://api.xyz.com:3001';
 }
 
 class App extends Component {
@@ -31,7 +33,7 @@ class App extends Component {
   }
 
   requestDataWithHttp = () => {
-    fetch(`${apiBaseUrl}/api/users/Vincenzo`, this.requestOptions)
+    fetch(`${baseUrl}/api/users/Vincenzo`, this.requestOptions)
       .then(response => {
         let content = null;
         if (response.headers.get('Content-Type').includes('application/json')) {
@@ -58,7 +60,7 @@ class App extends Component {
   requestDataWithIframe = () => {
     this.channel.port1.postMessage(
       JSON.stringify({
-        url: `${apiBaseUrl}/api/users/Vincenzo`,
+        url: `${baseUrl}/api/users/Vincenzo`,
         requestOptions: this.requestOptions
       })
     );
@@ -72,14 +74,14 @@ class App extends Component {
   iframeLoaded = () => {
     this.channel = new MessageChannel();
     this.channel.port1.onmessage = this.handleIFrameMessage;
-    this.iframe.contentWindow.postMessage('port', iframeBaseUrl, [this.channel.port2]);
+
   }
 
   render() {
     return (
       <div className="App">
         <iframe
-          src={`${iframeBaseUrl}/serve-seed.html`}
+
           height="0"
           width="0"
           frameBorder="0"

@@ -1,12 +1,16 @@
 machine:
   node:
     version: 7.2.0
+
+  hosts:
+    api.xyz.com: 127.0.0.1
+
   post:
     - npm install -g npm@latest
 
 checkout:
   post:
-    - cd client && npm install
+    - cd client && echo 'NODE_ENV=CI' > .env && npm install
 
 dependencies:
   cache_directories:
