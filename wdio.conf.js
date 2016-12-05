@@ -14,7 +14,7 @@ exports.config = {
   logLevel: 'silent',
   coloredLogs: true,
   screenshotPath: './errorShots/',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: (process.env.CI ? 'http://console.apiary.dev:3000' : 'http://localhost:3000'),
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,

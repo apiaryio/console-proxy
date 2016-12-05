@@ -9,9 +9,9 @@ import './App.css';
 let baseUrl = 'http://localhost:3001';
 
 if (process.env.NODE_ENV === 'production') {
-  baseUrl = 'https://apiarycustomerseed.herokuapp.com';
+  baseUrl = 'http://apiarycustomerseed.herokuapp.com';
 } else if (process.env.NODE_ENV === 'CI') {
-  baseUrl = 'https://api.xyz.com:3001';
+  baseUrl = 'http://api.xyz.com:3001';
 }
 
 class App extends Component {
