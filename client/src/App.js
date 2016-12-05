@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 
 
-let apiBaseUrl = '';
+let apiBaseUrl = 'http://localhost:3000';
 let iframeBaseUrl = 'http://localhost:3001';
 
 if (process.env.NODE_ENV === 'production') {
