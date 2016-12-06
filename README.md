@@ -49,8 +49,8 @@ making the request from the same domain.
 - Enjoy
 
 #### Client
-- Create a new invisible `iframe` tag, and host the backend provided page
-- Create a communication channel using the [Channel Messaging API][3]
+- Creates a new invisible `iframe` tag, and host the backend provided page
+- Creates a communication channel using the [JSChannel][5]
 - When you have to send a request, serialise it and send it to the port.
 - Wait for the response and react accordingly.
 

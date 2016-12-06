@@ -10,9 +10,9 @@ import './App.css';
 let baseUrl = 'http://localhost:3001';
 
 if (process.env.NODE_ENV === 'production') {
-  baseUrl = 'http://apiarycustomerseed.herokuapp.com';
+  baseUrl = 'https://apiarycustomerseed.herokuapp.com';
 } else if (process.env.NODE_ENV === 'CI') {
-  baseUrl = 'http://api.xyz.com:3001';
+  baseUrl = 'https://api.xyz.com:3001';
 }
 
 class App extends Component {
@@ -59,23 +59,29 @@ class App extends Component {
   }
 
   requestDataWithIframe = () => {
-    this.channel.port1.postMessage(
-      JSON.stringify({
+    this.channel.call({
+      method: 'httpRequest',
+      params: {
         url: `${baseUrl}/api/users/Vincenzo`,
         requestOptions: this.requestOptions
-      })
-    );
+      },
+      success: this.handleIFrameMessage,
+      error: console.error
+    });
+
   }
 
 
   handleIFrameMessage = (e) => {
-    this.setState(e.data);
+    this.setState(e);
   }
 
   iframeLoaded = () => {
-    this.channel = new MessageChannel();
-    this.channel.port1.onmessage = this.handleIFrameMessage;
-    this.iframe.contentWindow.postMessage('port', baseUrl, [this.channel.port2]);
+    this.channel = Channel.build({
+      window: this.iframe.contentWindow,
+      origin: "*",
+      scope: "testScope",
+    });
   }
 
   render() {
@@ -101,14 +107,14 @@ class App extends Component {
         <button className="App-button iframeCall" onClick={this.requestDataWithIframe}>Call me using the iframe!</button>
         {this.state && ['headers', 'body'].map((k) => {
           return (
-            typeof(this.state[k]) !== 'string' ?
+            typeof (this.state[k]) !== 'string' ?
               <div key={k}>
                 <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
                 {this.state[k] && Object.keys(this.state[k]).map((key) => {
                   return <pre className={`detail_${k}`} key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
                 })}
-            </div>
-            : <div key={k}><p>{k}</p><pre>{this.state[k]}</pre></div>
+              </div>
+              : <div key={k}><p>{k}</p><pre>{this.state[k]}</pre></div>
           );
         })
         }
