@@ -28,9 +28,9 @@ class App extends Component {
   get requestOptions() {
     return {
       method: 'POST',
-      data: JSON.stringify({
+      data: {
         nickname: 'vncz'
-      }),
+      },
       headers: {
         'Content-Type': 'application/json'
       }
