@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "NODE_ENV=production npm run build && surge -p ./build -d apiary-console.surge.sh"
+    "deploy": "npm run build && surge -p ./build -d apiary-console.surge.sh"
   },
   "proxy": "http://localhost:3001/"
 }
