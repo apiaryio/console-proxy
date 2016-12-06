@@ -60,17 +60,13 @@ across all the browsers. We might want to change the client once we will figure
 out the one that is able to fullfill all use cases.
 
 2. This example currently does not open at all on IE11, it does not work on
-Microsft Edge and it has some problems on Safari (it works but it's reporting some
-security warnings). Probably it would be better to say that only Chrome and
-Firefox can run both examples correclty.
+Microsft Edge.
 
 3. There's an important foreword I'm doing here: I'm assuming that the payload I
 want to send on the wire is serialisable. I should verify that.
 
 4. Also - I'm assuming all errors and responses that are coming from the
 Http server are serialisable as well. If not, we're screwed up.
-
-5. Guess what? There are no tests. Such **TDD**
 
 ## Security considerations
 1. [Subresource Integrity][6]
