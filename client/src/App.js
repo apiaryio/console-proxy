@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import Channel from 'jschannel';
+import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 
 /*
   Yeah I know, not really a great way to set the things here.
  */
-let baseUrl = 'http://localhost:3001';
-
-if (process.env.NODE_ENV === 'production') {
-  baseUrl = 'https://apiarycustomerseed.herokuapp.com';
-} else if (process.env.NODE_ENV === 'CI') {
-  baseUrl = 'https://api.xyz.com:3001';
-}
 
 class App extends Component {
+
+  constructor() {
+    super();
+
+    this.baseUrl = 'http://localhost:3001';
+    if (process.env.NODE_ENV === 'production') {
+      this.baseUrl = 'https://apiarycustomerseed.herokuapp.com';
+    } else if (process.env.NODE_ENV === 'CI') {
+      this.baseUrl = 'https://api.xyz.com:3001';
+    }
+
+    axios.defaults.baseURL = this.baseUrl;
+  }
 
   get requestOptions() {
     return {
       method: 'POST',
-      body: JSON.stringify({
+      data: JSON.stringify({
         nickname: 'vncz'
       }),
       headers: {
@@ -34,27 +41,8 @@ class App extends Component {
   }
 
   requestDataWithHttp = () => {
-    fetch(`${baseUrl}/api/users/Vincenzo`, this.requestOptions)
-      .then(response => {
-        let content = null;
-        if (response.headers.get('Content-Type').includes('application/json')) {
-          content = response.json();
-        } else {
-          content = response.text();
-        }
-
-        return Promise.all([response.headers, content]);
-      })
-      .then(([headers, body]) => {
-
-        let h = {};
-
-        for (let header of headers) {
-          h[header[0]] = header[1];
-        }
-
-        this.setState({ headers: h, body });
-      })
+    axios('/api/users/Vincenzo', this.requestOptions)
+      .then((response) => this.setState({ headers: response.headers, body: response.data }))
       .then(undefined, (err) => console.error(err.message || err));
   }
 
@@ -62,7 +50,7 @@ class App extends Component {
     this.channel.call({
       method: 'httpRequest',
       params: {
-        url: `${baseUrl}/api/users/Vincenzo`,
+        url: `${this.baseUrl}/api/users/Vincenzo`,
         requestOptions: this.requestOptions
       },
       success: this.handleIFrameMessage,
@@ -79,7 +67,7 @@ class App extends Component {
   iframeLoaded = () => {
     this.channel = Channel.build({
       window: this.iframe.contentWindow,
-      origin: baseUrl,
+      origin: this.baseUrl,
       scope: "apiary-console",
     });
   }
@@ -88,7 +76,7 @@ class App extends Component {
     return (
       <div className="App">
         <iframe
-          src={`${baseUrl}/serve-seed.html`}
+          src={`${this.baseUrl}/serve-seed.html`}
           height="0"
           width="0"
           frameBorder="0"
@@ -109,7 +97,7 @@ class App extends Component {
           return (
             typeof (this.state[k]) !== 'string' ?
               <div key={k}>
-                <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
+                <p>{k}: ({Object.keys(this.state[k]).length}elements)</p>
                 {this.state[k] && Object.keys(this.state[k]).map((key) => {
                   return <pre className={`detail_${k}`} key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
                 })}
