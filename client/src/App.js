@@ -74,14 +74,14 @@ class App extends Component {
   iframeLoaded = () => {
     this.channel = new MessageChannel();
     this.channel.port1.onmessage = this.handleIFrameMessage;
-
+    this.iframe.contentWindow.postMessage('port', baseUrl, [this.channel.port2]);
   }
 
   render() {
     return (
       <div className="App">
         <iframe
-
+          src={`${baseUrl}/serve-seed.html`}
           height="0"
           width="0"
           frameBorder="0"
