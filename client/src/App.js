@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import Channel from 'jschannel';
 import logo from './logo.svg';
 import './App.css';
 
