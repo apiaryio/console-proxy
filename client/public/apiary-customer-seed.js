@@ -1,7 +1,7 @@
 const chan = Channel.build({
   window: window.parent,
   origin: "*",
-  scope: "testScope"
+  scope: "apiary-console"
 });
 
 chan.bind('httpRequest', (trans, data) => {

@@ -79,8 +79,8 @@ class App extends Component {
   iframeLoaded = () => {
     this.channel = Channel.build({
       window: this.iframe.contentWindow,
-      origin: "*",
-      scope: "testScope",
+      origin: baseUrl,
+      scope: "apiary-console",
     });
   }
 
