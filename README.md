@@ -55,17 +55,10 @@ making the request from the same domain.
 - Wait for the response and react accordingly.
 
 ## Cavetas - Limitations - ToDo
-1. This example is using the `fetch` API - which is not currently that spread
-across all the browsers. We might want to change the client once we will figure
-out the one that is able to fullfill all use cases.
-
-2. This example currently does not open at all on IE11, it does not work on
-Microsft Edge.
-
-3. There's an important foreword I'm doing here: I'm assuming that the payload I
+1. There's an important foreword I'm doing here: I'm assuming that the payload I
 want to send on the wire is serialisable. I should verify that.
 
-4. Also - I'm assuming all errors and responses that are coming from the
+2. Also - I'm assuming all errors and responses that are coming from the
 Http server are serialisable as well. If not, we're screwed up.
 
 ## Security considerations
