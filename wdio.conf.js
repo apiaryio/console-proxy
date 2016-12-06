@@ -1,7 +1,7 @@
 exports.config = {
   protocol: 'http',
   specs: [
-    '*.test.js'
+    'test/*.js'
   ],
   exclude: [
   ],
