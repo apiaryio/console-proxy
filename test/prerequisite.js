@@ -9,6 +9,7 @@ describe('Prerequisites', () => {
         const httpHeadersCount = Object.keys(browser.elements('.detail_headers').value).length;
         const httpBodyCount = Object.keys(browser.elements('.detail_body').value).length;
 
+        browser.refresh();
         browser.leftClick('.iframeCall');
         browser.waitForExist('.detail_headers');
         browser.waitForExist('.detail_body');
