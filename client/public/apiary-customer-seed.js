@@ -1,3 +1,5 @@
+axios.defaults.validateStatus = () => true;
+
 const chan = Channel.build({
   window: window.parent,
   origin: "*",

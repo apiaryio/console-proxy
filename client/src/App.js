@@ -22,6 +22,7 @@ class App extends Component {
     }
 
     axios.defaults.baseURL = this.baseUrl;
+    axios.defaults.validateStatus = () => true;
   }
 
   get requestOptions() {
