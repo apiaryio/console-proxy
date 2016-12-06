@@ -60,7 +60,6 @@ class App extends Component {
 
   }
 
-
   handleIFrameMessage = (e) => {
     this.setState(e);
   }

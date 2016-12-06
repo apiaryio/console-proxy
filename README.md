@@ -40,7 +40,10 @@ making the request from the same domain.
 
 ### Deploy
 1. Push the current repo somewhere (heroku?)
-2. Go to the `client` directory and `npm deploy`. You might need access to the surge free account
+2. Go to the `client` directory and `npm run deploy`. You might need access to the surge free account
+
+#### Faster deploy
+1. `npm run deploy` (if you have all the things set up)
 
 ### Real use case
 

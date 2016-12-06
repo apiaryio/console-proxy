@@ -11,6 +11,7 @@
     "test": "wdio ./wdio.sauce.conf.js",
     "test:local": "wdio",
     "start": "concurrently \"node index.js\" \"cd client && npm start\"",
+    "deploy": "concurrently \"git push -f heroku master\" \"cd client && npm run deploy\"",
     "chromedriver": "chromedriver --port=4444 --url-base=/wd/hub"
   },
   "author": "",
