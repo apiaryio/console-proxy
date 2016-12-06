@@ -77,7 +77,11 @@ Http server are serialisable as well. If not, we're screwed up.
 
 ## Interesting links
 
-[JSChannel][4] by Mozilla and its [npmised improved version][5]
+[JSChannel][4] by Mozilla and its [npmised improved version][5].
+
+Note: `JSChannel` is using `postMessage` as communication mechanism. It would be
+really really interesting to fork the project and make it use the
+[Channel Messaging API][3].
 
 [1]: https://github.com/apiaryio/apiary-console-seed/blob/master/serve-seed.ejs
 [2]: https://github.com/apiaryio/apiary-console-seed/blob/master/client/public/apiary-customer-seed.js
