@@ -7,6 +7,8 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', './')
 
+app.use(cors());
+
 app.get('/serve-seed.html', (req, res) => {
   res.render('./serve-seed.ejs', {
     url: process.env.APIARY_SEED_URL || 'http://localhost:3000'
@@ -14,7 +16,6 @@ app.get('/serve-seed.html', (req, res) => {
 });
 
 app.use(bodyParser.json());
-app.use(cors());
 
 app.post('/api/users/:user', (req, res) => {
   return res.json(Object.assign({
