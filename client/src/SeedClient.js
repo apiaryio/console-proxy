@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import Channel from 'jschannel';
 
+const CHANNEL_NOT_READY = 'CHANNEL_NOT_READY';
+
 class Seed extends Component {
 
   componentWillUnmount() {
     this.iframe.removeEventListener('load', this.iframeLoaded);
+    this.channel.destroy();
   }
 
   request = (requestOptions, callback) => {
+    if (this.state.ready !== true)
+      return callback(new Error(CHANNEL_NOT_READY));
+
     this.channel.call({
       method: 'httpRequest',
       params: requestOptions,
@@ -21,6 +27,7 @@ class Seed extends Component {
       window: this.iframe.contentWindow,
       origin: this.props.baseUrl,
       scope: this.props.scope,
+      onReady: () => { this.setState({ ready: true }) }
     });
   }
 

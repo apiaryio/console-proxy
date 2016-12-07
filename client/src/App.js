@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    axios.defaults.baseURL = props.params ? props.params.baseUrl : props.baseUrl;
+    axios.defaults.baseURL = props.params.baseUrl;
     axios.defaults.validateStatus = () => true;
   }
 
