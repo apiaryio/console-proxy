@@ -7,7 +7,7 @@ class Seed extends Component {
     this.iframe.removeEventListener('load', this.iframeLoaded);
   }
 
-  requestDataWithIframe = (requestOptions, callback) => {
+  request = (requestOptions, callback) => {
     this.channel.call({
       method: 'httpRequest',
       params: requestOptions,

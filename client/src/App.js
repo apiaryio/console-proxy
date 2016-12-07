@@ -5,15 +5,15 @@ import Seed from './SeedClient';
 import logo from './logo.svg';
 import './App.css';
 
-/*
-  Yeah I know, not really a great way to set the things here.
- */
 
 class App extends Component {
 
   constructor() {
     super();
 
+    /*
+      Yeah I know, not really a great way to set the things here.
+    */
     this.baseUrl = 'http://localhost:3001';
     if (process.env.NODE_ENV === 'production') {
       this.baseUrl = 'https://apiarycustomerseed.herokuapp.com';
@@ -44,8 +44,8 @@ class App extends Component {
       .then(undefined, (err) => console.error(err.message || err));
   }
 
-  requestDataWithIframe = () => {
-    this.Seed.requestDataWithIframe(this.requestOptions, this.handleIFrameMessage);
+  requestDataWithSeed = () => {
+    this.Seed.request(this.requestOptions, this.handleIFrameMessage);
   }
 
   handleIFrameMessage = (err, data) => {
@@ -68,7 +68,7 @@ class App extends Component {
           Sit down and try to call the console with our own super server
         </p>
         <button className="App-button httpCall" onClick={this.requestDataWithHttp}>Call me with regular Http!</button>
-        <button className="App-button iframeCall" onClick={this.requestDataWithIframe}>Call me using the Seed component!</button>
+        <button className="App-button iframeCall" onClick={this.requestDataWithSeed}>Call me using the Seed component!</button>
         {this.state && ['headers', 'body'].map((k) => {
           return (
             typeof (this.state[k]) !== 'string' ?
