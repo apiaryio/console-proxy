@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import axios from 'axios';
-import Seed from './Seed'
+import Seed from './SeedClient';
 import logo from './logo.svg';
 import './App.css';
 
@@ -27,6 +27,7 @@ class App extends Component {
 
   get requestOptions() {
     return {
+      url: '/api/users/Vincenzo',
       method: 'POST',
       data: {
         nickname: 'vncz'
@@ -38,7 +39,7 @@ class App extends Component {
   }
 
   requestDataWithHttp = () => {
-    axios('/api/users/Vincenzo', this.requestOptions)
+    axios(this.requestOptions)
       .then((response) => this.setState({ headers: response.headers, body: response.data }))
       .then(undefined, (err) => console.error(err.message || err));
   }

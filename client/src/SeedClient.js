@@ -10,10 +10,7 @@ class Seed extends Component {
   requestDataWithIframe = (requestOptions, callback) => {
     this.channel.call({
       method: 'httpRequest',
-      params: {
-        url: `${this.props.baseUrl}/api/users/Vincenzo`,
-        requestOptions: requestOptions
-      },
+      params: requestOptions,
       success: (data) => callback(null, data),
       error: callback
     });
