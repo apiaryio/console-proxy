@@ -8,20 +8,10 @@ import './App.css';
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    /*
-      Yeah I know, not really a great way to set the things here.
-    */
-    this.baseUrl = 'http://localhost:3001';
-    if (process.env.NODE_ENV === 'production') {
-      this.baseUrl = 'https://apiarycustomerseed.herokuapp.com';
-    } else if (process.env.NODE_ENV === 'CI') {
-      this.baseUrl = 'https://api.xyz.com:3001';
-    }
-
-    axios.defaults.baseURL = this.baseUrl;
+    axios.defaults.baseURL = props.baseUrl;
     axios.defaults.validateStatus = () => true;
   }
 
@@ -59,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Seed ref={(s) => { this.Seed = s } } baseUrl={`${this.baseUrl}/serve-seed.html`} scope="apiary-console" />
+        <Seed ref={(s) => { this.Seed = s } } baseUrl={`${this.props.baseUrl}/serve-seed.html`} scope="apiary-console" />
         <div className="App-header">
           <img src={logo} className={classNames('App-logo', { 'App-logo--loaded': this.state })} alt="logo" />
           <h2>Hello, I am the Apiary Console</h2>
@@ -85,6 +75,18 @@ class App extends Component {
       </div>
     );
   }
+}
+
+App.defaultProps = {
+  baseUrl: (() => {
+    let baseUrl = 'http://localhost:3001';
+    if (process.env.NODE_ENV === 'production') {
+      baseUrl = 'https://apiarycustomerseed.herokuapp.com';
+    } else if (process.env.NODE_ENV === 'CI') {
+      baseUrl = 'https://api.xyz.com:3001';
+    }
+    return baseUrl;
+  })()
 }
 
 export default App;
