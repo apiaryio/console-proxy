@@ -59,7 +59,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Seed ref={(s) => { this.Seed = s } } baseUrl={this.baseUrl} scope="apiary-console" />
+        <Seed ref={(s) => { this.Seed = s } } baseUrl={`${this.baseUrl}/serve-seed.html`} scope="apiary-console" />
         <div className="App-header">
           <img src={logo} className={classNames('App-logo', { 'App-logo--loaded': this.state })} alt="logo" />
           <h2>Hello, I am the Apiary Console</h2>

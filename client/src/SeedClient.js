@@ -27,7 +27,7 @@ class Seed extends Component {
   render() {
     return (
       <iframe
-        src={`${this.props.baseUrl}/serve-seed.html`}
+        src={this.props.baseUrl}
         height="0"
         width="0"
         frameBorder="0"
