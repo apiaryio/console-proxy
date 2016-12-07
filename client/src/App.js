@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    axios.defaults.baseURL = props.baseUrl;
+    axios.defaults.baseURL = props.params ? props.params.baseUrl : props.baseUrl;
     axios.defaults.validateStatus = () => true;
   }
 
@@ -49,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Seed ref={(s) => { this.Seed = s } } baseUrl={`${this.props.baseUrl}/serve-seed.html`} scope="apiary-console" />
+        <Seed ref={(s) => { this.Seed = s } } baseUrl={`${this.props.params.baseUrl}/serve-seed.html`} scope="apiary-console" />
         <div className="App-header">
           <img src={logo} className={classNames('App-logo', { 'App-logo--loaded': this.state })} alt="logo" />
           <h2>Hello, I am the Apiary Console</h2>
@@ -75,18 +75,6 @@ class App extends Component {
       </div>
     );
   }
-}
-
-App.defaultProps = {
-  baseUrl: (() => {
-    let baseUrl = 'http://localhost:3001';
-    if (process.env.NODE_ENV === 'production') {
-      baseUrl = 'https://apiarycustomerseed.herokuapp.com';
-    } else if (process.env.NODE_ENV === 'CI') {
-      baseUrl = 'https://api.xyz.com:3001';
-    }
-    return baseUrl;
-  })()
 }
 
 export default App;
