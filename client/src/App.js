@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Channel from 'jschannel';
 import axios from 'axios';
+import Seed from './Seed'
 import logo from './logo.svg';
 import './App.css';
 
@@ -37,10 +37,6 @@ class App extends Component {
     };
   }
 
-  componentWillUnmount() {
-    this.iframe.removeEventListener('load', this.iframeLoaded);
-  }
-
   requestDataWithHttp = () => {
     axios('/api/users/Vincenzo', this.requestOptions)
       .then((response) => this.setState({ headers: response.headers, body: response.data }))
@@ -48,42 +44,17 @@ class App extends Component {
   }
 
   requestDataWithIframe = () => {
-    this.channel.call({
-      method: 'httpRequest',
-      params: {
-        url: `${this.baseUrl}/api/users/Vincenzo`,
-        requestOptions: this.requestOptions
-      },
-      success: this.handleIFrameMessage,
-      error: console.error
-    });
-
+    this.Seed.requestDataWithIframe(this.requestOptions, this.handleIFrameMessage);
   }
 
-  handleIFrameMessage = (e) => {
-    this.setState(e);
-  }
-
-  iframeLoaded = () => {
-    this.channel = Channel.build({
-      window: this.iframe.contentWindow,
-      origin: this.baseUrl,
-      scope: "apiary-console",
-    });
+  handleIFrameMessage = (err, data) => {
+    this.setState(data);
   }
 
   render() {
     return (
       <div className="App">
-        <iframe
-          src={`${this.baseUrl}/serve-seed.html`}
-          height="0"
-          width="0"
-          frameBorder="0"
-          sandbox="allow-scripts allow-same-origin"
-          ref={(iframe) => { if (iframe) { this.iframe = iframe; iframe.addEventListener('load', this.iframeLoaded, false); } } }
-          >
-        </iframe>
+        <Seed ref={(s) => { this.Seed = s } } baseUrl={this.baseUrl} scope="apiary-console" />
         <div className="App-header">
           <img src={logo} className={classNames('App-logo', { 'App-logo--loaded': this.state })} alt="logo" />
           <h2>Hello, I am the Apiary Console</h2>
@@ -97,7 +68,7 @@ class App extends Component {
           return (
             typeof (this.state[k]) !== 'string' ?
               <div key={k}>
-                <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
+                <p>{k}: ({Object.keys(this.state[k]).length}elements)</p>
                 {this.state[k] && Object.keys(this.state[k]).map((key) => {
                   return <pre className={`detail_${k}`} key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
                 })}
