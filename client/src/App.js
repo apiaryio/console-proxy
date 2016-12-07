@@ -68,7 +68,7 @@ class App extends Component {
           Sit down and try to call the console with our own super server
         </p>
         <button className="App-button httpCall" onClick={this.requestDataWithHttp}>Call me with regular Http!</button>
-        <button className="App-button iframeCall" onClick={this.requestDataWithIframe}>Call me using the iframe!</button>
+        <button className="App-button iframeCall" onClick={this.requestDataWithIframe}>Call me using the Seed component!</button>
         {this.state && ['headers', 'body'].map((k) => {
           return (
             typeof (this.state[k]) !== 'string' ?
