@@ -73,7 +73,7 @@ class App extends Component {
           return (
             typeof (this.state[k]) !== 'string' ?
               <div key={k}>
-                <p>{k}: ({Object.keys(this.state[k]).length}elements)</p>
+                <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
                 {this.state[k] && Object.keys(this.state[k]).map((key) => {
                   return <pre className={`detail_${k}`} key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
                 })}
