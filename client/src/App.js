@@ -48,6 +48,10 @@ class App extends Component {
   }
 
   handleIFrameMessage = (err, data) => {
+    if (err) {
+      return console.error(err);
+    }
+
     this.setState(data);
   }
 
