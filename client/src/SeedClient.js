@@ -27,7 +27,10 @@ class Seed extends Component {
       window: this.iframe.contentWindow,
       origin: this.props.baseUrl,
       scope: this.props.scope,
-      onReady: () => { this.setState({ ready: true }) }
+      onReady: () => {
+        this.setState({ ready: true });
+        this.props.onReady && this.props.onReady();
+      }
     });
   }
 
@@ -48,7 +51,8 @@ class Seed extends Component {
 
 Seed.propTypes = {
   baseUrl: React.PropTypes.string,
-  scope: React.PropTypes.string
+  scope: React.PropTypes.string,
+  onReady: React.PropTypes.func
 };
 
 export default Seed;

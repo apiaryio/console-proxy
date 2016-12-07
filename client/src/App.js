@@ -49,7 +49,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Seed ref={(s) => { this.Seed = s } } baseUrl={`${this.props.params.baseUrl}/serve-seed.html`} scope="apiary-console" />
+        <Seed
+          ref={(s) => { this.Seed = s } } baseUrl={`${this.props.params.baseUrl}/serve-seed.html`} scope="apiary-console"
+          onReady={() => { console.info('Seed is ready to communicate'); } }
+          />
         <div className="App-header">
           <img src={logo} className={classNames('App-logo', { 'App-logo--loaded': this.state })} alt="logo" />
           <h2>Hello, I am the Apiary Console</h2>
@@ -63,7 +66,7 @@ class App extends Component {
           return (
             typeof (this.state[k]) !== 'string' ?
               <div key={k}>
-                <p>{k}: ({Object.keys(this.state[k]).length} elements)</p>
+                <p>{k}: ({Object.keys(this.state[k]).length}elements)</p>
                 {this.state[k] && Object.keys(this.state[k]).map((key) => {
                   return <pre className={`detail_${k}`} key={`${k}_${key}`}>{key}: {this.state[k][key]}</pre>
                 })}
