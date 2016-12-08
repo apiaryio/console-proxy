@@ -11,14 +11,16 @@ class Seed extends Component {
   }
 
   request = (requestOptions, callback) => {
-    if (this.state.ready !== true)
-      return callback(new Error(CHANNEL_NOT_READY));
+    return new Promise((resolve, reject) => {
+      if (this.state.ready !== true)
+        return reject(new Error(CHANNEL_NOT_READY));
 
-    this.channel.call({
-      method: 'httpRequest',
-      params: requestOptions,
-      success: (data) => callback(null, data),
-      error: callback
+      this.channel.call({
+        method: 'httpRequest',
+        params: requestOptions,
+        success: resolve,
+        error: reject
+      });
     });
   }
 

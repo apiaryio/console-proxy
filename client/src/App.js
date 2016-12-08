@@ -35,15 +35,9 @@ class App extends Component {
   }
 
   requestDataWithSeed = () => {
-    this.Seed.request(this.requestOptions, this.handleIFrameMessage);
-  }
-
-  handleIFrameMessage = (err, data) => {
-    if (err) {
-      return console.error(err);
-    }
-
-    this.setState(data);
+    this.Seed.request(this.requestOptions)
+      .then((data) => this.setState(data))
+      .catch(console.error);
   }
 
   render() {
