@@ -6,7 +6,14 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/jschannel"></script>
 
-    <script src="<%= url %>/apiary-customer-seed.js" integrity="sha384-HOzLN8QUpCfHOAEAu9iCawy9te2xCffP212t/V8/IahUncFFxsQWrz5PgC8PJM4/" crossorigin="anonymous"></script>
+    <script
+      src="<%= url %>/apiary-customer-seed.js"
+      <% if (process.env.NODE_ENV === 'production') { %>
+      integrity="sha384-HOzLN8QUpCfHOAEAu9iCawy9te2xCffP212t/V8/IahUncFFxsQWrz5PgC8PJM4/"
+      crossorigin="anonymous"
+      <% } %>
+    >
+    </script>
   </head>
 
 </html>
