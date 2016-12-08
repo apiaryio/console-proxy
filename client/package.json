@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "^0.8.2",
-    "surge": "^0.18.0"
+    "firebase-tools": "^3.2.0",
+    "react-scripts": "^0.8.2"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && surge -p ./build -d apiary-console.surge.sh"
+    "deploy": "npm run build && firebase deploy --project apiary-console"
   },
   "proxy": "http://localhost:3001/"
 }
