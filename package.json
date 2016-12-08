@@ -8,7 +8,8 @@
     "npm": "4.0.2"
   },
   "scripts": {
-    "test": "wdio ./wdio.sauce.conf.js",
+    "test": "concurrently \"npm run test:sauce\" \"cd client && npm test\"",
+    "test:sauce": "wdio ./wdio.sauce.conf.js",
     "test:local": "wdio",
     "start": "concurrently \"node index.js\" \"cd client && npm start\"",
     "deploy": "concurrently \"git push -f heroku master\" \"cd client && npm run deploy\"",
