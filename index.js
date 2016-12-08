@@ -1,6 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const xml = require('xml');
+
+const createResponseObject = (req) => {
+  return Object.assign({
+    id: req.params.id,
+    name: 'Vincenzo',
+    surname: 'Chianese',
+    age: 27 // Ahi Ahi, getting older
+  }, req.body);
+}
 
 const app = express();
 
@@ -10,7 +20,7 @@ app.set('views', './')
 app.use(cors());
 
 app.get('/serve-seed.html', (req, res) => {
-  setTimeout(()=>{
+  setTimeout(() => {
     res.render('./serve-seed.ejs', {
       url: process.env.APIARY_SEED_URL || 'http://localhost:3000'
     });
@@ -19,13 +29,13 @@ app.get('/serve-seed.html', (req, res) => {
 
 app.use(bodyParser.json());
 
-app.post('/api/users/:user', (req, res) => {
-  return res.json(Object.assign({
-    id: req.params.id,
-    name: 'Vincenzo',
-    surname: 'Chianese',
-    age: 27 // Ahi Ahi, getting older
-  }, req.body));
+app.post('/api/users/:id', (req, res) => {
+  return res.json(createResponseObject(req));
+});
+
+app.post('/api/users/xml/:id', (req, res) => {
+  res.set('Content-Type', 'text/xml');
+  res.send(xml(createResponseObject(req)));
 });
 
 
