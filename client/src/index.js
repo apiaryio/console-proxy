@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Match, Miss } from 'react-router';
-import App from './App';
+import App from './App/App';
 import './index.css';
 
 const getBaseUrl = () => {

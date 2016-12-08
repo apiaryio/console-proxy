@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import axios from 'axios';
-import Seed from './SeedClient';
+import Seed from '../Seed/Seed';
 import logo from './logo.svg';
 import './App.css';
 
