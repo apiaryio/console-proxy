@@ -14,6 +14,11 @@ const getBaseUrl = () => {
   return baseUrl;
 };
 
+/*
+  I totally understand that I should probably be crucified for the way I am using
+  ReactRouter. You can do that when I'll be back in Prague.
+*/
+
 ReactDOM.render(
   (<BrowserRouter>
     <div>
