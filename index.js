@@ -10,9 +10,11 @@ app.set('views', './')
 app.use(cors());
 
 app.get('/serve-seed.html', (req, res) => {
-  res.render('./serve-seed.ejs', {
-    url: process.env.APIARY_SEED_URL || 'http://localhost:3000'
-  });
+  setTimeout(()=>{
+    res.render('./serve-seed.ejs', {
+      url: process.env.APIARY_SEED_URL || 'http://localhost:3000'
+    });
+  }, req.query.timeout || 0);
 });
 
 app.use(bodyParser.json());
