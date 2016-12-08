@@ -12,7 +12,7 @@ class Seed extends Component {
 
   request = (requestOptions, callback) => {
     return new Promise((resolve, reject) => {
-      if (this.state.ready !== true)
+      if (!this.state || this.state.ready !== true)
         return reject(new Error(CHANNEL_NOT_READY));
 
       this.channel.call({
