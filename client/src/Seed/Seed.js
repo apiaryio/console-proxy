@@ -52,8 +52,8 @@ class Seed extends Component {
 }
 
 Seed.propTypes = {
-  baseUrl: React.PropTypes.string,
-  scope: React.PropTypes.string,
+  baseUrl: React.PropTypes.string.isRequired,
+  scope: React.PropTypes.string.isRequired,
   onReady: React.PropTypes.func
 };
 
