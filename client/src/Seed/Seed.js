@@ -12,7 +12,7 @@ class Seed extends Component {
 
   request = (requestOptions, callback) => {
     return new Promise((resolve, reject) => {
-      if (!this.state || this.state.ready !== true)
+      if (!this.ready || this.ready !== true)
         return reject(new Error(CHANNEL_NOT_READY));
 
       this.channel.call({
@@ -30,7 +30,7 @@ class Seed extends Component {
       origin: this.props.baseUrl,
       scope: this.props.scope,
       onReady: () => {
-        this.setState({ ready: true });
+        this.ready = true;
         this.props.onReady && this.props.onReady();
       }
     });
