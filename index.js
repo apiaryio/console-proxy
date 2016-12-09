@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const xml = require('xml');
+const routes = require('http-zoo/src/routes');
 
 const createResponseObject = (req) => {
   return Object.assign({
@@ -27,6 +28,7 @@ app.get('/serve-seed.html', (req, res) => {
   }, req.query.timeout || 0);
 });
 
+app.use(routes);
 app.use(bodyParser.json());
 
 app.post('/api/users/:id', (req, res) => {
@@ -37,6 +39,8 @@ app.post('/api/users/xml/:id', (req, res) => {
   res.set('Content-Type', 'text/xml');
   res.send(xml(createResponseObject(req)));
 });
+
+
 
 
 app.listen(process.env.PORT || 3001);
