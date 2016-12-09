@@ -10,7 +10,7 @@ class Seed extends Component {
     this.channel.destroy();
   }
 
-  request = (requestOptions, callback) => {
+  request = (requestOptions) => {
     return new Promise((resolve, reject) => {
       if (!this.ready || this.ready !== true)
         return reject(new Error(CHANNEL_NOT_READY));
