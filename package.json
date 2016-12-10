@@ -16,7 +16,7 @@
     "chromedriver": "chromedriver --port=4444 --url-base=/wd/hub"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
