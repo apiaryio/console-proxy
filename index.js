@@ -40,7 +40,10 @@ app.post('/api/users/xml/:id', (req, res) => {
   res.send(xml(createResponseObject(req)));
 });
 
+let server = undefined;
 
+module.exports.start = () => server = app.listen(process.env.PORT || 3001, () => console.log("Started"));
+module.exports.stop = () => server.close(() => console.log("Closed"));
 
-
-app.listen(process.env.PORT || 3001);
+if (require.main === module)
+  module.exports.start();
