@@ -68,6 +68,9 @@ compliant and fault tolerant we found so far. If you're interested more, we've
 been testing it a lot on different http edge cases. You can have a look to
 [node-hamms][8] repository
 
+The returned promise will resolve with an [Axios Response Object][9], or rejected
+with an error, if any occurs during the operation
+
 ### Usage for development
 
 1. Clone the repository
@@ -113,3 +116,4 @@ Http server are serialisable as well. If not, we're screwed up.
 [6]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
 [7]: https://github.com/mzabriskie/axios#request-config
 [8]: https://github.com/apiaryio/node-hamms
+[9]: https://github.com/mzabriskie/axios#response-schema
