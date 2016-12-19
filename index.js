@@ -16,13 +16,13 @@ const createResponseObject = (req) => {
 const app = express();
 
 app.set('view engine', 'ejs');
-app.set('views', './')
+app.set('views', __dirname)
 
 app.use(cors());
 
 app.get('/serve-seed.html', (req, res) => {
   setTimeout(() => {
-    res.render('./serve-seed.ejs', {
+    res.render('serve-seed.ejs', {
       seedUrl: process.env.APIARY_SEED_URL || 'http://localhost:3000',
       seedScope: req.query.scope || 'apiary-console',
       seedOrigin: req.query.origin || '*'
@@ -44,8 +44,8 @@ app.post('/api/users/xml/:id', (req, res) => {
 
 let server = undefined;
 
-module.exports.start = () => server = app.listen(process.env.PORT || 3001, () => console.log("Started"));
-module.exports.stop = () => server.close(() => console.log("Closed"));
+module.exports.start = (cb) => server = app.listen(process.env.PORT || 3001, cb);
+module.exports.stop = (cb) => server.close(cb);
 
 if (require.main === module)
   module.exports.start();
