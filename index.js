@@ -23,7 +23,9 @@ app.use(cors());
 app.get('/serve-seed.html', (req, res) => {
   setTimeout(() => {
     res.render('./serve-seed.ejs', {
-      url: process.env.APIARY_SEED_URL || 'http://localhost:3000'
+      seedUrl: process.env.APIARY_SEED_URL || 'http://localhost:3000',
+      seedScope: req.query.scope || 'apiary-console',
+      seedOrigin: req.query.origin || '*'
     });
   }, req.query.timeout || 0);
 });
