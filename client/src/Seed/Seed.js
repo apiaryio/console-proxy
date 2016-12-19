@@ -27,8 +27,9 @@ class Seed extends Component {
   iframeLoaded = () => {
     this.channel = Channel.build({
       window: this.iframe.contentWindow,
-      origin: this.props.baseUrl,
+      origin: this.props.origin,
       scope: this.props.scope,
+      debugOutput: this.props.debugOutput,
       onReady: () => {
         this.ready = true;
         this.props.onReady && this.props.onReady();
@@ -39,7 +40,7 @@ class Seed extends Component {
   render() {
     return (
       <iframe
-        src={this.props.baseUrl}
+        src={this.props.seedUrl}
         height="0"
         width="0"
         frameBorder="0"
@@ -52,9 +53,16 @@ class Seed extends Component {
 }
 
 Seed.propTypes = {
-  baseUrl: React.PropTypes.string.isRequired,
+  seedUrl: React.PropTypes.string.isRequired,
+  origin: React.PropTypes.string,
   scope: React.PropTypes.string.isRequired,
+  debugOutput: React.PropTypes.bool,
   onReady: React.PropTypes.func
 };
+
+Seed.defaultProps = {
+  origin: '*',
+  debugOutput: false
+}
 
 export default Seed;

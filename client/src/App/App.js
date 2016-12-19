@@ -44,7 +44,9 @@ class App extends Component {
     return (
       <div className="App">
         <Seed
-          ref={(s) => { this.Seed = s } } baseUrl={`${this.props.params.baseUrl}/serve-seed.html`} scope="apiary-console"
+          ref={(s) => { this.Seed = s } }
+          seedUrl={`${this.props.params.baseUrl}/serve-seed.html`}
+          scope="apiary-console"
           onReady={() => { console.info('Seed is ready to communicate'); } }
           />
         <div className="App-header">
