@@ -48,6 +48,7 @@ class App extends Component {
           seedUrl={`${this.props.params.baseUrl}/serve-seed.html`}
           scope="apiary-console"
           onReady={() => { console.info('Seed is ready to communicate'); } }
+          debugOutput={true}
           />
         <div className="App-header">
           <img src={logo} className={classNames('App-logo', { 'App-logo--loaded': this.state })} alt="logo" />
