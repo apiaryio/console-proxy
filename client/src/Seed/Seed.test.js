@@ -34,12 +34,8 @@ beforeAll((done) => {
 });
 
 afterAll((done) => {
-  setTimeout(() => {
-    server.stop(() => {
-      seedServer.close();
-      done()
-    })
-  }, 10000);
+  seedServer.close();
+  server.stop(done);
 });
 
 describe('if I perform a request with an non existend seed page', () => {

@@ -1,6 +1,8 @@
 axios.defaults.validateStatus = () => true;
 
-function buildChannel(origin, scope) {
+const Apiary = window.Apiary || {};
+
+Apiary.buildChannel = function (origin, scope) {
   const chan = Channel.build({
     window: window.parent,
     origin: origin,
@@ -14,3 +16,4 @@ function buildChannel(origin, scope) {
       .then(trans.complete, trans.error)
   })
 }
+
