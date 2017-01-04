@@ -2,7 +2,7 @@
   "name": "apiary-console-seed",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/Seed/Seed.js",
   "engines": {
     "node": "7.2.0",
     "npm": "4.0.2"
