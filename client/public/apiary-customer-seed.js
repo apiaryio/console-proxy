@@ -13,7 +13,11 @@ Apiary.buildChannel = function (origin, scope) {
     trans.delayReturn(true);
 
     axios(requestOptions)
-      .then(trans.complete, trans.error)
+      .then(trans.complete, (err) => {
+        let errorCopy = JSON.parse(JSON.stringify(err));
+        errorCopy.message = err.message;
+        trans.error(errorCopy);
+      })
   })
 }
 

@@ -40,13 +40,13 @@ class App extends Component {
 
   requestDataWithHttp = () => {
     axios(this.requestOptions)
-      .then((response) => this.setState({ headers: response.headers, body: response.data }))
+      .then((response) => this.setState(response))
       .then(undefined, (err) => console.error(err.message || err));
   }
 
   requestDataWithSeed = () => {
     this.Seed.request(this.requestOptions)
-      .then((data) => this.setState(data))
+      .then((response) => this.setState(response))
       .catch(console.error);
   }
 
@@ -69,7 +69,7 @@ class App extends Component {
         </p>
         <button className="App-button httpCall" onClick={this.requestDataWithHttp}>Call me with regular Http!</button>
         <button className="App-button iframeCall" onClick={this.requestDataWithSeed}>Call me using the Seed component!</button>
-        {this.state && ['headers', 'body'].map((k) => {
+        {this.state && ['headers', 'data'].map((k) => {
           return (
             typeof (this.state[k]) !== 'string' ?
               <div key={k}>
