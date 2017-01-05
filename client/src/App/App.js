@@ -5,13 +5,23 @@ import Seed from '../Seed/Seed';
 import logo from './logo.svg';
 import './App.css';
 
+const getBaseUrl = () => {
+  let baseUrl = 'http://localhost:3001';
+  if (process.env.NODE_ENV === 'production') {
+    baseUrl = 'https://apiarycustomerseed.herokuapp.com';
+  } else if (process.env.NODE_ENV === 'CI') {
+    baseUrl = 'https://api.xyz.com:3001';
+  }
+  return baseUrl;
+};
+
 
 class App extends Component {
 
   constructor(props) {
     super(props);
 
-    axios.defaults.baseURL = props.params.baseUrl;
+    axios.defaults.baseURL = getBaseUrl();
     axios.defaults.validateStatus = () => true;
   }
 
@@ -45,7 +55,7 @@ class App extends Component {
       <div className="App">
         <Seed
           ref={(s) => { this.Seed = s } }
-          seedUrl={`${this.props.params.baseUrl}/serve-seed.html`}
+          seedUrl={`${getBaseUrl()}/serve-seed.html`}
           scope="apiary-console"
           onReady={() => { console.info('Seed is ready to communicate'); } }
           debugOutput={true}
