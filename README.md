@@ -1,4 +1,4 @@
-# Apiary Console with seed proof of concept
+# Apiary seed component
 
 ## What's up?
 
@@ -54,7 +54,7 @@ serving page.
 the parent page and child frame. If the child frame hadn't set up its end of the
 channel, for instance, `onReady` would never get called.
 
-Once you've rendered an instance of the component, you can send requests throught
+Once you've "rendered" an instance of the component, you can send requests throught
 its instance method `request`. In order to use it, you might want to save the
 component instance using the `ref` property provided by `React`
 
@@ -78,13 +78,6 @@ with an error, if any occurs during the operation
 3. Go to the `client` directory and `npm install`
 4. Go back and `npm start`
 
-### Deploy
-1. Push the current repo somewhere (heroku?)
-2. Go to the `client` directory and `npm run deploy`. You might need access to the Firebase free account
-
-#### Faster deploy
-1. `npm run deploy` (if you have all the things set up)
-
 ### How is this working internally?
 
 #### Backend server
@@ -96,13 +89,6 @@ with an error, if any occurs during the operation
 - Creates a communication channel using the [JSChannel][5]
 - When you have to send a request, serialise it and send it to the port.
 - Wait for the response and react accordingly.
-
-## Cavetas - Limitations
-1. There's an important foreword I'm doing here: I'm assuming that the payload I
-want to send on the wire is serialisable. I should verify that.
-
-2. Also - I'm assuming all errors and responses that are coming from the
-Http server are serialisable as well. If not, we're screwed up.
 
 ## Security considerations
 1. [Subresource Integrity][6]
