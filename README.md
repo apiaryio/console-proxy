@@ -38,17 +38,25 @@ a method to forward your requests throught the seed.
 
 ```javascript
 Seed.propTypes = {
-  baseUrl: React.PropTypes.string.isRequired,
+  seedUrl: React.PropTypes.string,
+  origin: React.PropTypes.string,
   scope: React.PropTypes.string.isRequired,
+  debugOutput: React.PropTypes.bool,
   onReady: React.PropTypes.func
 };
 ```
 
-`baseUrl`: The URL where the seed page is being served. This should actually be
+`seedUrl`: The URL where the seed page is being served. This should actually be
 on a customer domain, possibly under the same domain where the requests will land.
+If null, the seed will assume you want to use the Chrome extension (if installed)
+
+`origin`: The origin of the requests. This might be useful if you want to make sure
+that only matching origins will answer the messages
 
 `scope`: An indentification string that *MUST* match with the one provided on the
 serving page.
+
+`debugOutput`: Whether you want or not to output logs from `jschannel` library
 
 `onReady`: Callback called once actual communication has been established between
 the parent page and child frame. If the child frame hadn't set up its end of the
