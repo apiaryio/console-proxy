@@ -14,8 +14,8 @@ baseConf.config.capabilities.push(
     version: '47.0',
     platform: 'Windows 10'
   }, {
-    browserName: 'safari',
-    version: '10.0',
+    browserName: 'chrome',
+    version: '55.0',
     platform: 'OS X 10.11'
   }, {
     browserName: 'microsoftedge',

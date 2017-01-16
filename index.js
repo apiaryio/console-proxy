@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const xml = require('xml');
-const routes = require('http-zoo/src/routes');
+const routes = require('node-hamms/src/routes');
+const path = require('path');
 
 const createResponseObject = (req) => {
   return Object.assign({
@@ -16,7 +17,7 @@ const createResponseObject = (req) => {
 const app = express();
 
 app.engine('html', require('ejs').renderFile);
-app.set('views', __dirname)
+app.set('views', __dirname);
 
 app.use(cors());
 
@@ -28,6 +29,10 @@ app.get('/serve-seed.html', (req, res) => {
       seedOrigin: req.query.origin || '*'
     });
   }, req.query.timeout || 0);
+});
+
+app.get('/fixture.html', (req, res) => {
+  res.sendFile(path.join(__dirname, './test/fixtures/index.html'));
 });
 
 app.use(routes);
