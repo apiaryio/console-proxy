@@ -53,7 +53,6 @@ class App extends Component {
   requestDataWithExtension = () => {
     let options = this.requestOptions;
     options.url = 'http://localhost:3001' + options.url;
-    delete options.data;
     this.chromeSeed.request(options)
       .then((response) => {this.setState(response)})
       .catch(console.error);
