@@ -12,6 +12,11 @@ class Seed extends Component {
 
   request = (requestOptions) => {
     return new Promise((resolve, reject) => {
+      return window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', requestOptions, (response) => {
+        if (response.error)
+          return reject(response.error);
+        return resolve(response.data);
+      });
       if (!this.ready || this.ready !== true)
         return reject(new Error(CHANNEL_NOT_READY));
 
