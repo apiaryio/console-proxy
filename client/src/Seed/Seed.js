@@ -6,26 +6,44 @@ const CHANNEL_NOT_READY = 'CHANNEL_NOT_READY';
 class Seed extends Component {
 
   componentWillUnmount() {
-    this.iframe.removeEventListener('load', this.iframeLoaded);
-    this.channel.destroy();
+    if (this.props.seedUrl) {
+      this.iframe.removeEventListener('load', this.iframeLoaded);
+      this.channel.destroy();
+    }
+  }
+
+  componentDidMount() {
+    if (!this.props.seedUrl) {
+      window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', {method: 'ping'}, () => {
+        this.ready = true;
+        this.props.onReady && this.props.onReady();
+      });
+    }
   }
 
   request = (requestOptions) => {
     return new Promise((resolve, reject) => {
-      return window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', requestOptions, (response) => {
-        if (response.error)
-          return reject(response.error);
-        return resolve(response.data);
-      });
       if (!this.ready || this.ready !== true)
         return reject(new Error(CHANNEL_NOT_READY));
 
-      this.channel.call({
-        method: 'httpRequest',
-        params: requestOptions,
-        success: resolve,
-        error: reject
-      });
+      if (this.props.seedUrl) {
+        this.channel.call({
+          method: 'httpRequest',
+          params: requestOptions,
+          success: resolve,
+          error: reject
+        });
+
+      } else {
+        window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', {
+          method: 'httpRequest',
+          params: requestOptions
+        }, (response) => {
+          if (response.error)
+            return reject(response.error);
+          return resolve(response.data);
+        });
+      }
     });
   }
 
@@ -43,7 +61,7 @@ class Seed extends Component {
   }
 
   render() {
-    return (
+    return (this.props.seedUrl ?
       <iframe
         src={this.props.seedUrl}
         height="0"
@@ -52,13 +70,13 @@ class Seed extends Component {
         sandbox="allow-scripts allow-same-origin"
         ref={(iframe) => { if (iframe) { this.iframe = iframe; iframe.addEventListener('load', this.iframeLoaded, false); } } }
         >
-      </iframe>
+      </iframe> : null
     );
   }
 }
 
 Seed.propTypes = {
-  seedUrl: React.PropTypes.string.isRequired,
+  seedUrl: React.PropTypes.string,
   origin: React.PropTypes.string,
   scope: React.PropTypes.string.isRequired,
   debugOutput: React.PropTypes.bool,

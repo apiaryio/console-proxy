@@ -64,13 +64,13 @@ class App extends Component {
       <div className="App">
         <Seed
           ref={(s) => { this.Seed = s } }
-          seedUrl={`${getBaseUrl()}/serve-seed.html`}
+        seedUrl={`${getBaseUrl()}/serve-seed.html`}
           scope="apiary-console"
           onReady={() => { console.info('Seed is ready to communicate'); } }
           />
         <Seed
           ref={(s) => { this.chromeSeed = s } }
-          seedUrl={""}
+          seedUrl={null}
           scope="apiary-console"
           onReady={() => { console.info('Seed is ready to communicate'); } }
           />
