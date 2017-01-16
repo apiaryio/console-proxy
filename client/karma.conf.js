@@ -4,6 +4,7 @@ const path = require('path');
 var webpackConfig = require(path.join(__dirname, './node_modules/react-scripts/config/webpack.config.dev.js'));
 webpackConfig.devtool = 'inline-source-map';
 
+
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -20,5 +21,11 @@ module.exports = function (config) {
     browsers: ['Chrome', 'Firefox'],
     singleRun: true,
     concurrency: 1,
+    customLaunchers: {
+      ex_Chrome: {
+        base: 'Chrome',
+        flags: ['--load-extension=../extension']
+      }
+    }
   })
 }
