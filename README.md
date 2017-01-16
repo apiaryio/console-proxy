@@ -48,19 +48,25 @@ Seed.propTypes = {
 
 `seedUrl`: The URL where the seed page is being served. This should actually be
 on a customer domain, possibly under the same domain where the requests will land.
-If null, the seed will assume you want to use the Chrome extension (if installed)
+If this is null, all the communication will be performed using the Chrome extension
+(if installed)
 
 `origin`: The origin of the requests. This might be useful if you want to make sure
-that only matching origins will answer the messages
+that only matching origins will answer the messages. Ignored when `seedUrl` is null,
+as the Chrome extension provides its own origin specification and verification
+in the manifest file.
 
 `scope`: An indentification string that *MUST* match with the one provided on the
-serving page.
+serving page. Ignored when `seedUrl` is null, as the Chrome extension provides its
+ own scope specification and verification in the manifest file.
 
-`debugOutput`: Whether you want or not to output logs from `jschannel` library
+`debugOutput`: Whether you want or not to output logs from `jschannel` library)
 
 `onReady`: Callback called once actual communication has been established between
 the parent page and child frame. If the child frame hadn't set up its end of the
-channel, for instance, `onReady` would never get called.
+channel, for instance, `onReady` would never get called. The same goes with Chrome
+extension: if it's not installed, the callback would never get called.
+If you do not get this call, you *shouldn't* use the component.
 
 Once you've "rendered" an instance of the component, you can send requests throught
 its instance method `request`. In order to use it, you might want to save the

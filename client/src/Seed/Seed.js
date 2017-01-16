@@ -14,9 +14,11 @@ class Seed extends Component {
 
   componentDidMount() {
     if (!this.props.seedUrl) {
-      window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', {method: 'ping'}, () => {
-        this.ready = true;
-        this.props.onReady && this.props.onReady();
+      window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', { method: 'ping' }, (reply) => {
+        if (reply && reply.pong) {
+          this.ready = true;
+          this.props.onReady && this.props.onReady();
+        }
       });
     }
   }
