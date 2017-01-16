@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "Apiary Proxy Chrome Extension",
+  "version": "1.0.0",
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "https://localhost:3000/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "build/extension.js"
+    ],
+    "persistent": false
+  },
+
+  "permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}
