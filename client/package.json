@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "firebase-tools": "^3.2.1",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.0",
     "karma-chrome-launcher": "^2.0.0",
@@ -28,8 +27,7 @@
     "test:iframe": "karma start ./karma.iframe.conf.js",
     "test:chrome": "karma start ./karma.chrome.conf.js",
     "test": "npm run test:chrome && npm run test:iframe",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build && firebase deploy --project apiary-console"
+    "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:3001/"
 }
