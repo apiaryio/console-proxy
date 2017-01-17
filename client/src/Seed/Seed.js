@@ -20,7 +20,7 @@ class Seed extends Component {
   componentDidMount() {
     if (!this.props.seedUrl) {
       if (window.chrome && window.chrome.runtime && window.chrome.runtime.sendMessage) {
-        window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', { method: 'ping' }, (reply) => {
+        window.chrome.runtime.sendMessage('ijlncpebbpeeagehccegnddhhdgcaflf', { method: 'ping' }, (reply) => {
           if (reply && reply.pong) {
             this.ready = true;
             this.props.onReady && this.props.onReady();
@@ -44,7 +44,7 @@ class Seed extends Component {
         });
 
       } else {
-        window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', {
+        window.chrome.runtime.sendMessage('ijlncpebbpeeagehccegnddhhdgcaflf', {
           method: 'httpRequest',
           params: requestOptions
         }, (response) => {
