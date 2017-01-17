@@ -19,12 +19,14 @@ class Seed extends Component {
 
   componentDidMount() {
     if (!this.props.seedUrl) {
-      window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', { method: 'ping' }, (reply) => {
-        if (reply && reply.pong) {
-          this.ready = true;
-          this.props.onReady && this.props.onReady();
-        }
-      });
+      if (window.chrome && window.chrome.runtime && window.chrome.runtime.sendMessage) {
+        window.chrome.runtime.sendMessage('kldpeogcjjfpkfdndnppggbdiooiomfd', { method: 'ping' }, (reply) => {
+          if (reply && reply.pong) {
+            this.ready = true;
+            this.props.onReady && this.props.onReady();
+          }
+        });
+      }
     }
   }
 
