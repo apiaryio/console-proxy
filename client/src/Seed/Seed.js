@@ -7,8 +7,13 @@ class Seed extends Component {
 
   componentWillUnmount() {
     if (this.props.seedUrl) {
-      this.iframe.removeEventListener('load', this.iframeLoaded);
-      this.channel.destroy();
+      if (this.iframe) {
+        this.iframe.removeEventListener('load', this.iframeLoaded);
+      }
+
+      if (this.channel) {
+        this.channel.destroy();
+      }
     }
   }
 
@@ -41,6 +46,9 @@ class Seed extends Component {
           method: 'httpRequest',
           params: requestOptions
         }, (response) => {
+          if (!response) {
+            return reject(new Error('No response returned from Chrome extension'));
+          }
           if (response.error)
             return reject(response.error);
           return resolve(response.data);
@@ -80,7 +88,7 @@ class Seed extends Component {
 Seed.propTypes = {
   seedUrl: React.PropTypes.string,
   origin: React.PropTypes.string,
-  scope: React.PropTypes.string.isRequired,
+  scope: React.PropTypes.string,
   debugOutput: React.PropTypes.bool,
   onReady: React.PropTypes.func
 };
