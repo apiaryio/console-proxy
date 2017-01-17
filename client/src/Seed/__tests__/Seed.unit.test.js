@@ -27,6 +27,13 @@ function getRequestOptions() {
   };
 }
 
+function checkResponseData(res) {
+  expect(res.data).toBeDefined();
+  expect(res.headers).toBeDefined();
+  expect(Object.keys(res.headers).length).toBe(7);
+  expect(res.status).toBe(200);
+}
+
 describe('Component interface test', () => {
   let seed = undefined;
 
@@ -92,13 +99,31 @@ describe('Component interface test', () => {
 
     it('valid http request', (done) => {
       return seed.request(getRequestOptions()).then((res) => {
-        expect(res.data).toBeDefined();
-        expect(res.headers).toBeDefined();
-        expect(res.status).toBe(200);
+        checkResponseData(res);
         done()
-      }, done);
+      }, done.fail.bind(this, new Error('This promise should not have been rejected')));
     });
 
   });
+
+  describe('seed with everything set (Chrome)', () => {
+
+    beforeAll((done) => {
+      seed = ReactDOM.render(<Seed onReady={done} />,
+        document.getElementById('container')
+      );
+    });
+
+    it('valid http request', (done) => {
+      const options = getRequestOptions();
+      options.url = 'http://localhost:3001' + options.url;
+      return seed.request(options).then((res) => {
+        checkResponseData(res);
+        done()
+      }, done.fail.bind(this, new Error('This promise should not have been rejected')));
+    });
+
+  });
+
 });
 
