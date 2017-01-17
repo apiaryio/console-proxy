@@ -11,7 +11,7 @@ chrome.runtime.onMessageExternal.addListener((data, sender, sendResponse) => {
       .then((data) => { sendResponse({ data }); }, (err) => {
         let errorCopy = JSON.parse(JSON.stringify(err));
         errorCopy.message = err.message;
-        sendResponse({ error: err });
+        sendResponse({ error: errorCopy });
       })
   }
 

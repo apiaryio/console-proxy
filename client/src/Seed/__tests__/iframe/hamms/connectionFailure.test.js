@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Seed from '../../Seed';
+import Seed from '../../../Seed';
 
 
 describe('Connection Failure', () => {

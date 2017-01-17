@@ -25,7 +25,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "karma start",
+    "test:iframe": "karma start ./karma.iframe.conf.js",
+    "test:chrome": "karma start ./karma.chrome.conf.js",
+    "test": "npm run test:chrome && npm run test:iframe",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy --project apiary-console"
   },

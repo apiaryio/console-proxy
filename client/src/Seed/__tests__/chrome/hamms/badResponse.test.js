@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Seed from '../../Seed';
+import Seed from '../../../Seed';
 
 
 describe('Bad response', () => {
@@ -11,9 +11,6 @@ describe('Bad response', () => {
     div.setAttribute('id', 'container');
     document.body.appendChild(div);
     seed = ReactDOM.render(<Seed
-      scope="apiary-console"
-      seedUrl="http://localhost:3001/serve-seed.html"
-      origin="*"
       onReady={done}
       />, document.getElementById('container'));
   });
@@ -24,7 +21,7 @@ describe('Bad response', () => {
 
   // Server accepts traffic but never sends back data
   it('should handle no response gracefully', (done) => {
-    seed.request({ url: '/responses/none', timeout: 5000 })
+    seed.request({ url: 'http://localhost:3001/responses/none', timeout: 5000 })
       .then(done.fail.bind(this, 'This promise should not have been resolved'), (err) => {
         expect(err.code).toBe('ECONNABORTED');
         done();
@@ -33,7 +30,7 @@ describe('Bad response', () => {
 
   // Server sends back an empty string immediately upon connection
   it('should handle empty response gracefully (GET)', (done) => {
-    seed.request({ url: '/responses/empty', method: 'GET', timeout: 5000 })
+    seed.request({ url: 'http://localhost:3001/responses/empty', method: 'GET', timeout: 5000 })
       .then(done.fail.bind(this, 'This promise should not have been resolved'), (err) => {
         // Node.js returns 'ECONNRESET', browser 'Network Error'
         const actual = err.code ? err.code : err.message;
@@ -47,7 +44,7 @@ describe('Bad response', () => {
 
   // Server sends back an empty string after client sends data
   it('should handle empty response gracefully (POST)', (done) => {
-    seed.request({ url: '/responses/empty-string', method: 'POST', data: 'foo bar', timeout: 5000 })
+    seed.request({ url: 'http://localhost:3001/responses/empty-string', method: 'POST', data: 'foo bar', timeout: 5000 })
       .then(done.fail.bind(this, 'This promise should not have been resolved'), (err) => {
         // Node.js returns 'ECONNRESET', browser 'Network Error'
         const actual = err.code ? err.code : err.message;
@@ -61,7 +58,7 @@ describe('Bad response', () => {
 
   // Server sends back a malformed response ("foo bar") immediately upon connection
   it('should handle malformed response gracefully (GET)', (done) => {
-    seed.request({ url: '/responses/malformed', method: 'GET' })
+    seed.request({ url: 'http://localhost:3001/responses/malformed', method: 'GET' })
       // Chrome and Firefox parse malformed response with 2OO status code
       .then((res) => {
         expect(res.status).toBe(200);
@@ -81,7 +78,7 @@ describe('Bad response', () => {
 
   // Server sends back a malformed response ("foo bar") after the client sends data
   it('should handle malformed response gracefully (POST)', (done) => {
-    seed.request({ url: '/responses/malformed', method: 'POST', data: 'foo bar' })
+    seed.request({ url: 'http://localhost:3001/responses/malformed', method: 'POST', data: 'foo bar' })
       // Chrome and Firefox parse malformed response with 2OO status code
       .then((res) => {
         expect(res.status).toBe(200);

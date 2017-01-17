@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Seed from '../../Seed';
+import Seed from '../../../Seed';
 
 
 describe('Invalid Headers', () => {
@@ -12,9 +12,6 @@ describe('Invalid Headers', () => {
     document.body.appendChild(div);
 
     seed = ReactDOM.render(<Seed
-      scope="apiary-console"
-      seedUrl="http://localhost:3001/serve-seed.html"
-      origin="*"
       onReady={done}
       />, document.getElementById('container'));
   });
@@ -26,7 +23,7 @@ describe('Invalid Headers', () => {
   // Server will send a response with a Content-Length: 3 header,
   // however the response is actually 26
   it('should handle different Content-Length in response gracefully', (done) => {
-    seed.request({ url: '/headers/content-length', timeout: 5000 })
+    seed.request({ url: 'http://localhost:3001/headers/content-length', timeout: 5000 })
       // Browser strips request body according to length
       // set in the header and resolves promise
       .then((res) => {

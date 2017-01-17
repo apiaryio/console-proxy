@@ -9,7 +9,7 @@ module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
-    files: ['src/**/**.test.js'],
+    files: ['src/**/chrome/**/**.test.js'],
     exclude: [],
     preprocessors: { 'src/**/**.test.js': ['webpack', 'sourcemap'] },
     webpack: webpackConfig,
@@ -18,14 +18,14 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['ex_Chrome'],
     singleRun: true,
-    concurrency: 1,
     customLaunchers: {
       ex_Chrome: {
         base: 'Chrome',
         flags: ['--load-extension=../extension']
       }
-    }
+    },
+    concurrency: 1,
   })
 }

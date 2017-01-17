@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Seed from '../../Seed';
+import Seed from '../../../Seed';
 
 
 describe('Status Codes', () => {
@@ -13,9 +13,6 @@ describe('Status Codes', () => {
     document.body.appendChild(div);
 
     seed = ReactDOM.render(<Seed
-      scope="apiary-console"
-      seedUrl="http://localhost:3001/serve-seed.html"
-      origin="*"
       onReady={done}
       />, document.getElementById('container'));
   });
