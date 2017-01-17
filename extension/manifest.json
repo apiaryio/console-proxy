@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "externally_connectable": {
     "matches": [
-      "http://localhost:3000/*",
-      "https://localhost:3000/*"
+      "http://localhost:*/*",
+      "https://localhost:*/*"
     ]
   },
   "background": {
