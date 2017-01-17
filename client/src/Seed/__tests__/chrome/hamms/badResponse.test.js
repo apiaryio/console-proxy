@@ -12,6 +12,7 @@ describe('Bad response', () => {
     document.body.appendChild(div);
     seed = ReactDOM.render(<Seed
       onReady={done}
+      seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf"
       />, document.getElementById('container'));
   });
 

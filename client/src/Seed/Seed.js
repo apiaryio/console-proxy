@@ -5,8 +5,13 @@ const CHANNEL_NOT_READY = 'CHANNEL_NOT_READY';
 
 class Seed extends Component {
 
+  constructor(props) {
+    super(props);
+    this.useIframe = (this.props.seedUrl.startsWith('http:') || this.props.seedUrl.startsWith('https:'));
+  }
+
   componentWillUnmount() {
-    if (this.props.seedUrl) {
+    if (this.useIFrame) {
       if (this.iframe) {
         this.iframe.removeEventListener('load', this.iframeLoaded);
       }
@@ -18,9 +23,9 @@ class Seed extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.seedUrl) {
+    if (!this.useIframe) {
       if (window.chrome && window.chrome.runtime && window.chrome.runtime.sendMessage) {
-        window.chrome.runtime.sendMessage('ijlncpebbpeeagehccegnddhhdgcaflf', { method: 'ping' }, (reply) => {
+        window.chrome.runtime.sendMessage(this.props.seedUrl, { method: 'ping' }, (reply) => {
           if (reply && reply.pong) {
             this.ready = true;
             this.props.onReady && this.props.onReady();
@@ -31,11 +36,13 @@ class Seed extends Component {
   }
 
   request = (requestOptions) => {
+    const useIframe = this.useIframe;
+
     return new Promise((resolve, reject) => {
       if (!this.ready || this.ready !== true)
         return reject(new Error(CHANNEL_NOT_READY));
 
-      if (this.props.seedUrl) {
+      if (useIframe) {
         this.channel.call({
           method: 'httpRequest',
           params: requestOptions,
@@ -44,7 +51,7 @@ class Seed extends Component {
         });
 
       } else {
-        window.chrome.runtime.sendMessage('ijlncpebbpeeagehccegnddhhdgcaflf', {
+        window.chrome.runtime.sendMessage(this.props.seedUrl, {
           method: 'httpRequest',
           params: requestOptions
         }, (response) => {
@@ -73,7 +80,7 @@ class Seed extends Component {
   }
 
   render() {
-    return (this.props.seedUrl ?
+    return (this.useIframe ?
       <iframe
         src={this.props.seedUrl}
         height="0"
@@ -88,7 +95,7 @@ class Seed extends Component {
 }
 
 Seed.propTypes = {
-  seedUrl: React.PropTypes.string,
+  seedUrl: React.PropTypes.string.isRequired,
   origin: React.PropTypes.string,
   scope: React.PropTypes.string,
   debugOutput: React.PropTypes.bool,

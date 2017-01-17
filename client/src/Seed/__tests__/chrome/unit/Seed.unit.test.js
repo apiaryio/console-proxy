@@ -42,7 +42,7 @@ describe('Component interface test', () => {
   describe('seed with everything set (Chrome)', () => {
 
     beforeAll((done) => {
-      seed = ReactDOM.render(<Seed onReady={done} />,
+      seed = ReactDOM.render(<Seed onReady={done} seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf"/>,
         document.getElementById('container')
       );
     });

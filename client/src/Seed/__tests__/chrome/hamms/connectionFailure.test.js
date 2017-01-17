@@ -13,6 +13,7 @@ describe('Connection Failure', () => {
 
     seed = ReactDOM.render(<Seed
       onReady={done}
+      seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf"
       />, document.getElementById('container'));
   });
 

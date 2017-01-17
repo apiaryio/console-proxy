@@ -38,9 +38,9 @@ a method to forward your requests throught the seed.
 
 ```javascript
 Seed.propTypes = {
-  seedUrl: React.PropTypes.string,
+  seedUrl: React.PropTypes.string.isRequired,
   origin: React.PropTypes.string,
-  scope: React.PropTypes.string.isRequired,
+  scope: React.PropTypes.string,
   debugOutput: React.PropTypes.bool,
   onReady: React.PropTypes.func
 };
@@ -48,8 +48,8 @@ Seed.propTypes = {
 
 `seedUrl`: The URL where the seed page is being served. This should actually be
 on a customer domain, possibly under the same domain where the requests will land.
-If this is null, all the communication will be performed using the Chrome extension
-(if installed)
+If the value does not start nor with `http:` nor with `https:`, then the component
+will take the value as the Chrome extension ID it should be communicate with.
 
 `origin`: The origin of the requests. This might be useful if you want to make sure
 that only matching origins will answer the messages. Ignored when `seedUrl` is null,
