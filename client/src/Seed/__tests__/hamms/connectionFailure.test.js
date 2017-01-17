@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Seed from '../../Seed';
 
-const div = document.createElement('div');
-div.setAttribute('id', 'container');
-document.body.appendChild(div);
 
 describe('Connection Failure', () => {
   let seed = undefined;
 
   beforeAll((done) => {
+    const div = document.createElement('div');
+    div.setAttribute('id', 'container');
+    document.body.appendChild(div);
+
     seed = ReactDOM.render(<Seed
       scope="apiary-console"
       seedUrl="http://localhost:3001/serve-seed.html"
@@ -17,6 +18,11 @@ describe('Connection Failure', () => {
       onReady={done}
       />, document.getElementById('container'));
   });
+
+  afterAll(() => {
+    ReactDOM.unmountComponentAtNode(document.getElementById('container'));
+  });
+
 
   // Connection that hangs forever
   it('should handle connection timeout gracefully', (done) => {
