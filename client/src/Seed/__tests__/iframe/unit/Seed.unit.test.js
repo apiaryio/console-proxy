@@ -91,7 +91,6 @@ describe('Component interface test', () => {
   });
 
   describe('seed with everything set', () => {
-
     beforeAll((done) => {
       seed = ReactDOM.render(<Seed
         scope="apiary-console"
@@ -109,6 +108,18 @@ describe('Component interface test', () => {
     });
 
   });
+
+  describe('seed with everything set (Chrome)', () => {
+    beforeAll(() => {
+      seed = ReactDOM.render(<Seed seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf" />,
+        document.getElementById('container')
+      );
+    });
+
+    ensureChannelNotReadyError(() => seed);
+
+  });
+
 
 });
 
