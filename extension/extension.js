@@ -1,19 +1,36 @@
 const axios = require('axios');
+const Channel = require('jschannel');
 
-chrome.runtime.onMessageExternal.addListener((data, sender, sendResponse) => {
-
-  if (data.method === 'ping') {
-    return sendResponse({ pong: true });
+const chan = Channel.build({
+  window: window,
+  origin: '*',
+  scope: 'chromeScope',
+  onReady: () => {
+    chan.bind('ping', () => {
+      return { pong: true };
+    });
   }
+});
 
-  if (data.method === 'httpRequest') {
-    axios(data.params)
-      .then((data) => { sendResponse({ data }); }, (err) => {
-        let errorCopy = JSON.parse(JSON.stringify(err));
-        errorCopy.message = err.message;
-        sendResponse({ error: errorCopy });
-      })
-  }
+
+chan.bind('httpRequest', (trans, requestOptions) => {
+  trans.delayReturn(true);
+
+  axios(requestOptions)
+    .then(trans.complete, (err) => {
+      let errorCopy = JSON.parse(JSON.stringify(err));
+      errorCopy.message = err.message;
+      trans.error(errorCopy);
+    })
+})
+
+chrome.runtime.onMessageExternal.addListener(({method, params}, sender, sendResponse) => {
+  chan.call({
+    method,
+    params,
+    success: (result) => sendResponse(result),
+    error: (err) => sendResponse({ error: err })
+  });
 
   return true;
 });

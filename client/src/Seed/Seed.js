@@ -57,7 +57,7 @@ class Seed extends Component {
           }
           if (response.error)
             return reject(response.error);
-          return resolve(response.data);
+          return resolve(response);
         });
       }
     });
