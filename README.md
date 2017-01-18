@@ -85,29 +85,25 @@ been testing it a lot on different http edge cases. You can have a look to
 The returned promise will resolve with an [Axios Response Object][9], or rejected
 with an error, if any occurs during the operation
 
+### Low level method
+
+If you need to pass a generic message to _the other side_ (whether it's the iframe
+or the Chrome extension) you can use the lower lever `sendMessage` method.
+
+```javascript
+const promise = seed.sendMessage({method, params});
+```
+
+- `method`: The method name you would like to call on _the other side_
+
+- `params`: The params that will be passed to that method.
+
 ### Usage for development
 
 1. Clone the repository
 2. `npm install`
 3. Go to the `client` directory and `npm install`
 4. Go back and `npm start`
-
-### How is this working internally?
-
-#### Backend server
-- Host a new HTML [page][1] linking the provided [script][2]
-- Enjoy
-
-#### Client
-- Creates a new invisible `iframe` tag, and host the backend provided page
-- Creates a communication channel using the [JSChannel][5]
-- When you have to send a request, serialise it and send it to the port.
-- Wait for the response and react accordingly.
-
-## Security considerations
-1. [Subresource Integrity][6]
-2. Verified `iframe` origin
-3. Always verify the syntax of the received message (it's done for us by [JSChannel][3])
 
 [1]: https://github.com/apiaryio/apiary-console-seed/blob/master/serve-seed.ejs
 [2]: https://github.com/apiaryio/apiary-console-seed/blob/master/client/public/apiary-customer-seed.js
