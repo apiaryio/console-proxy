@@ -13,8 +13,11 @@ module.exports = function (config) {
     exclude: [],
     preprocessors: { 'src/**/**.test.js': ['webpack', 'sourcemap'] },
     webpack: webpackConfig,
-    reporters: ['mocha'],
+    reporters: ['mocha', 'junit'],
     port: 9876,
+    junitReporter: {
+      outputDir: `${process.env.CIRCLE_TEST_REPORTS || '.'}/unit/chrome`,
+    },
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
