@@ -35,7 +35,7 @@ class Seed extends Component {
     }
   }
 
-  request = (requestOptions) => {
+  sendMessage({method, params}) {
     const useIframe = this.useIframe;
 
     return new Promise((resolve, reject) => {
@@ -44,17 +44,14 @@ class Seed extends Component {
 
       if (useIframe) {
         this.channel.call({
-          method: 'httpRequest',
-          params: requestOptions,
+          method,
+          params,
           success: resolve,
-          error: reject
+          error: reject,
         });
 
       } else {
-        window.chrome.runtime.sendMessage(this.props.seedUrl, {
-          method: 'httpRequest',
-          params: requestOptions
-        }, (response) => {
+        window.chrome.runtime.sendMessage(this.props.seedUrl, { method, params }, (response) => {
           if (!response) {
             return reject(new Error('No response returned from Chrome extension'));
           }
@@ -63,6 +60,13 @@ class Seed extends Component {
           return resolve(response.data);
         });
       }
+    });
+  }
+
+  request = (requestOptions) => {
+    return this.sendMessage({
+      method: 'httpRequest',
+      params: requestOptions
     });
   }
 
