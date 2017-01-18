@@ -5,6 +5,7 @@ const chan = Channel.build({
   window: window,
   origin: '*',
   scope: 'chromeScope',
+  remote: 'ping',
   onReady: () => {
     chan.bind('ping', () => {
       return { pong: true };

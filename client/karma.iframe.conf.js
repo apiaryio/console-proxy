@@ -24,5 +24,5 @@ module.exports = function (config) {
     browsers: ['Chrome', 'Firefox'],
     singleRun: true,
     concurrency: 1,
-  })
+  });
 }
