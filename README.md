@@ -38,21 +38,35 @@ a method to forward your requests throught the seed.
 
 ```javascript
 Seed.propTypes = {
-  baseUrl: React.PropTypes.string.isRequired,
-  scope: React.PropTypes.string.isRequired,
+  seedUrl: React.PropTypes.string.isRequired,
+  origin: React.PropTypes.string,
+  scope: React.PropTypes.string,
+  debugOutput: React.PropTypes.bool,
   onReady: React.PropTypes.func
 };
 ```
 
-`baseUrl`: The URL where the seed page is being served. This should actually be
+`seedUrl`: The URL where the seed page is being served. This should actually be
 on a customer domain, possibly under the same domain where the requests will land.
+If the value does not start nor with `http:` nor with `https:`, then the component
+will take the value as the Chrome extension ID it should be communicate with.
+
+`origin`: The origin of the requests. This might be useful if you want to make sure
+that only matching origins will answer the messages. Ignored when `seedUrl` is null,
+as the Chrome extension provides its own origin specification and verification
+in the manifest file.
 
 `scope`: An indentification string that *MUST* match with the one provided on the
-serving page.
+serving page. Ignored when `seedUrl` is null, as the Chrome extension provides its
+ own scope specification and verification in the manifest file.
+
+`debugOutput`: Whether you want or not to output logs from `jschannel` library)
 
 `onReady`: Callback called once actual communication has been established between
 the parent page and child frame. If the child frame hadn't set up its end of the
-channel, for instance, `onReady` would never get called.
+channel, for instance, `onReady` would never get called. The same goes with Chrome
+extension: if it's not installed, the callback would never get called.
+If you do not get this call, you *shouldn't* use the component.
 
 Once you've "rendered" an instance of the component, you can send requests throught
 its instance method `request`. In order to use it, you might want to save the
@@ -71,29 +85,25 @@ been testing it a lot on different http edge cases. You can have a look to
 The returned promise will resolve with an [Axios Response Object][9], or rejected
 with an error, if any occurs during the operation
 
+### Low level method
+
+If you need to pass a generic message to _the other side_ (whether it's the iframe
+or the Chrome extension) you can use the lower lever `sendMessage` method.
+
+```javascript
+const promise = seed.sendMessage({method, params});
+```
+
+- `method`: The method name you would like to call on _the other side_
+
+- `params`: The params that will be passed to that method.
+
 ### Usage for development
 
 1. Clone the repository
 2. `npm install`
 3. Go to the `client` directory and `npm install`
 4. Go back and `npm start`
-
-### How is this working internally?
-
-#### Backend server
-- Host a new HTML [page][1] linking the provided [script][2]
-- Enjoy
-
-#### Client
-- Creates a new invisible `iframe` tag, and host the backend provided page
-- Creates a communication channel using the [JSChannel][5]
-- When you have to send a request, serialise it and send it to the port.
-- Wait for the response and react accordingly.
-
-## Security considerations
-1. [Subresource Integrity][6]
-2. Verified `iframe` origin
-3. Always verify the syntax of the received message (it's done for us by [JSChannel][3])
 
 [1]: https://github.com/apiaryio/apiary-console-seed/blob/master/serve-seed.ejs
 [2]: https://github.com/apiaryio/apiary-console-seed/blob/master/client/public/apiary-customer-seed.js

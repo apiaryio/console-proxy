@@ -5,15 +5,7 @@
     <!-- All these libraries will be bundled in the proxy when we're ready -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/jschannel"></script>
-
-    <script
-      src="<%= seedUrl %>/apiary-proxy.js"
-      <% if (process.env.NODE_ENV === 'production') { %>
-      integrity="sha384-HOzLN8QUpCfHOAEAu9iCawy9te2xCffP212t/V8/IahUncFFxsQWrz5PgC8PJM4/"
-      crossorigin="anonymous"
-      <% } %>
-    >
-    </script>
+    <script src="<%= seedUrl %>/apiary-proxy.js"></script>
     <script>
       Apiary.buildChannel('<%= seedOrigin %>', '<%= seedScope %>');
     </script>

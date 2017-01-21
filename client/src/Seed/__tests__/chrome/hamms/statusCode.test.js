@@ -1,23 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Seed from '../../Seed';
+import Seed from '../../../Seed';
 
-const div = document.createElement('div');
-div.setAttribute('id', 'container');
-document.body.appendChild(div);
 
 describe('Status Codes', () => {
 
   let seed = undefined;
 
   beforeAll((done) => {
+    const div = document.createElement('div');
+    div.setAttribute('id', 'container');
+    document.body.appendChild(div);
+
     seed = ReactDOM.render(<Seed
-      scope="apiary-console"
-      seedUrl="http://localhost:3001/serve-seed.html"
-      origin="*"
       onReady={done}
+      seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf"
       />, document.getElementById('container'));
   });
+
+  afterAll(() => {
+    ReactDOM.unmountComponentAtNode(document.getElementById('container'));
+  });
+
 
   const statuses = [
     { code: 200, text: 'OK' },

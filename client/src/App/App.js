@@ -50,6 +50,14 @@ class App extends Component {
       .catch(console.error);
   }
 
+  requestDataWithExtension = () => {
+    let options = this.requestOptions;
+    options.url = 'http://localhost:3001' + options.url;
+    this.chromeSeed.request(options)
+      .then((response) => {this.setState(response)})
+      .catch(console.error);
+  }
+
   render() {
     return (
       <div className="App">
@@ -57,8 +65,12 @@ class App extends Component {
           ref={(s) => { this.Seed = s } }
           seedUrl={`${getBaseUrl()}/serve-seed.html`}
           scope="apiary-console"
-          onReady={() => { console.info('Seed is ready to communicate'); } }
-          debugOutput={true}
+          onReady={() => { console.info('Iframe Seed is ready to communicate'); } }
+          />
+        <Seed
+          ref={(s) => { this.chromeSeed = s } }
+          seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf"
+          onReady={() => { console.info('Chrome Seed is ready to communicate'); } }
           />
         <div className="App-header">
           <img src={logo} className={classNames('App-logo', { 'App-logo--loaded': this.state })} alt="logo" />
@@ -69,6 +81,7 @@ class App extends Component {
         </p>
         <button className="App-button httpCall" onClick={this.requestDataWithHttp}>Call me with regular Http!</button>
         <button className="App-button iframeCall" onClick={this.requestDataWithSeed}>Call me using the Seed component!</button>
+        <button className="App-button chromeCall" onClick={this.requestDataWithExtension}>Call me using the Chrome extension!</button>
         {this.state && ['headers', 'data'].map((k) => {
           return (
             typeof (this.state[k]) !== 'string' ?
