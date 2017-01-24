@@ -19,7 +19,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.16.0",
     "cors": "^2.8.1",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
@@ -29,7 +29,7 @@
   "devDependencies": {
     "chromedriver": "^2.27.2",
     "concurrently": "^3.1.0",
-    "jschannel": "git+https://github.com/XVincentX/jschannel.git#e061cc00a4e1c68c7e7c04270e9eb9aa46a5a819",
+    "jschannel": "^1.0.2",
     "wdio-jasmine-framework": "^0.2.19",
     "wdio-junit-reporter": "^0.2.0",
     "wdio-sauce-service": "^0.3.1",
