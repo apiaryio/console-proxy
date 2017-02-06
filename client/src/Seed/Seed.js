@@ -63,14 +63,14 @@ class Seed extends Component {
     });
   }
 
-  request = (requestOptions) => {
+  request(requestOptions) {
     return this.sendMessage({
       method: 'httpRequest',
       params: requestOptions
     });
   }
 
-  iframeLoaded = () => {
+  iframeLoaded() {
     this.channel = Channel.build({
       window: this.iframe.contentWindow,
       origin: this.props.origin,
