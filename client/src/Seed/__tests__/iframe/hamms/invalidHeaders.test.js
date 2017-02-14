@@ -13,7 +13,7 @@ describe('Invalid Headers', () => {
 
     seed = ReactDOM.render(<Seed
       scope="apiary-console"
-      seedUrl="http://localhost:3001/serve-seed.html"
+      seedUrl="http://localhost:3001/apiary/proxy"
       origin="*"
       onReady={done}
       />, document.getElementById('container'));

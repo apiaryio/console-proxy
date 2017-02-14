@@ -1,24 +1,23 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@apiaryio/console-proxy",
+  "version": "0.0.3",
   "main": "src/Seed/Seed",
   "devDependencies": {
+    "classnames": "^2.2.5",
     "jasmine-core": "^2.5.2",
-    "karma": "^1.4.0",
+    "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
-    "karma-firefox-launcher": "^1.0.0",
+    "karma-firefox-launcher": "^1.0.1",
     "karma-jasmine": "^1.1.0",
     "karma-junit-reporter": "^1.2.0",
-    "karma-mocha-reporter": "^2.2.2",
+    "karma-mocha-reporter": "^2.2.3",
     "karma-sauce-launcher": "^1.1.0",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^2.0.1",
-    "react-scripts": "^0.8.5"
+    "karma-webpack": "^2.0.3",
+    "react-scripts": "^0.9.5"
   },
   "dependencies": {
-    "axios": "^0.15.3",
-    "classnames": "^2.2.5",
+    "axios": "^0.16.0",
     "jschannel": "^1.0.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"

@@ -63,7 +63,7 @@ class App extends Component {
       <div className="App">
         <Seed
           ref={(s) => { this.Seed = s } }
-          seedUrl={`${getBaseUrl()}/serve-seed.html`}
+          seedUrl={`${getBaseUrl()}/apiary/proxy`}
           scope="apiary-console"
           onReady={() => { console.info('Iframe Seed is ready to communicate'); } }
           />

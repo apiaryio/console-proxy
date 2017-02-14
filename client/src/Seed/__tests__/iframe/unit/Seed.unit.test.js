@@ -68,7 +68,7 @@ describe('Component interface test', () => {
     beforeAll(() => {
       seed = ReactDOM.render(<Seed
         scope="apiary"
-        seedUrl="http://localhost:3001/serve-seed.html"
+        seedUrl="http://localhost:3001/apiary/proxy"
         origin="invalidOrigin"
         />, document.getElementById('container'));
     });
@@ -81,7 +81,7 @@ describe('Component interface test', () => {
     beforeAll(() => {
       seed = ReactDOM.render(<Seed
         scope="apiary"
-        seedUrl="http://localhost:3001/serve-seed.html"
+        seedUrl="http://localhost:3001/apiary/proxy"
         origin="*"
         />, document.getElementById('container'));
     });
@@ -94,7 +94,7 @@ describe('Component interface test', () => {
     beforeAll((done) => {
       seed = ReactDOM.render(<Seed
         scope="apiary-console"
-        seedUrl="http://localhost:3001/serve-seed.html"
+        seedUrl="http://localhost:3001/apiary/proxy"
         origin="*"
         onReady={done}
         />, document.getElementById('container'));

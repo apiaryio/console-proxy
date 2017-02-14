@@ -21,7 +21,7 @@ app.set('views', __dirname);
 
 app.use(cors());
 
-app.get('/serve-seed.html', (req, res) => {
+app.get('/apiary/proxy', (req, res) => {
   setTimeout(() => {
     res.render('serve-seed.ejs', {
       seedUrl: process.env.APIARY_SEED_URL || 'http://localhost:3000',

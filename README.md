@@ -31,6 +31,10 @@ making the request from the same domain.
 
 ## Details
 
+**Note:** The published package is in the `client` directory. All the other things
+here are merely as a playground infrastructure. Also, the only files you'd probably
+be interested in are `Seed.js` and `apiary-proxy-source.js`
+
 ### Usage in your application
 Fundamentally all we have here is a React component that should be dropped into
 your application - it will take care of establishing a connection and provide
@@ -104,6 +108,7 @@ const promise = seed.sendMessage({method, params});
 2. `npm install`
 3. Go to the `client` directory and `npm install`
 4. Go back and `npm start`
+
 
 [1]: https://github.com/apiaryio/apiary-console-seed/blob/master/serve-seed.ejs
 [2]: https://github.com/apiaryio/apiary-console-seed/blob/master/client/public/apiary-customer-seed.js
