@@ -18,14 +18,15 @@ chan.bind('httpRequest', (trans, requestOptions) => {
   trans.delayReturn(true);
 
   axios(requestOptions)
-    .then(trans.complete, (err) => {
+    .then(trans.complete)
+    .catch((err) => {
       let errorCopy = JSON.parse(JSON.stringify(err));
       errorCopy.message = err.message;
       trans.error(errorCopy);
     })
 })
 
-chrome.runtime.onMessageExternal.addListener(({method, params}, sender, sendResponse) => {
+chrome.runtime.onMessageExternal.addListener(({ method, params }, sender, sendResponse) => {
   chan.call({
     method,
     params,

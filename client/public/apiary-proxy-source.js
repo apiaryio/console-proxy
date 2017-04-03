@@ -18,7 +18,8 @@ Apiary.buildChannel = function (origin, scope) {
     trans.delayReturn(true);
 
     instance(requestOptions)
-      .then(trans.complete, (err) => {
+      .then(trans.complete)
+      .catch((err) => {
         let errorCopy = JSON.parse(JSON.stringify(err));
         errorCopy.message = err.message;
         trans.error(errorCopy);
