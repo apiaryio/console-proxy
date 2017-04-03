@@ -1,4 +1,6 @@
-axios.defaults.validateStatus = () => true;
+const instance = axios.create({
+  validateStatus: () => true
+});
 
 const Apiary = {};
 
@@ -12,7 +14,7 @@ Apiary.buildChannel = function (origin, scope) {
   chan.bind('httpRequest', (trans, requestOptions) => {
     trans.delayReturn(true);
 
-    axios(requestOptions)
+    instance(requestOptions)
       .then(trans.complete, (err) => {
         let errorCopy = JSON.parse(JSON.stringify(err));
         errorCopy.message = err.message;
