@@ -1,11 +1,14 @@
 # Apiary seed component
 
+**Warning**: This repo is being actively developed - therefore breaking API changes,
+as well concept and architecture revolutions might happen.
+
 ## What's up?
 
 This is a componend meant to act as a proxy between a website and a real server
 to overcome some limitations webservers have even if using CORS headers.
 
-## Context
+## Context
 
 We all know that, when making http calls from the browser to a server, we will
 have access to reduced set of headers due to security restrictions.
