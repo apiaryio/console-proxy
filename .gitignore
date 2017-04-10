@@ -17,3 +17,6 @@ build
 npm-debug.log
 
 *.xml
+
+*.crx
+*.pem
