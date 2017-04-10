@@ -9,16 +9,14 @@ machine:
   post:
     - npm install -g npm@latest
 
-checkout:
+dependencies:
   post:
     - cd client && echo 'NODE_ENV=CI' > .env && npm install
 
-dependencies:
   cache_directories:
     - "client/node_modules"
 
 test:
   pre:
-    - npm run build:extension
     - npm start:
         background: true

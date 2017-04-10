@@ -4,6 +4,7 @@
   "main": "src/Seed/Seed",
   "devDependencies": {
     "classnames": "^2.2.5",
+    "crx": "^3.2.1",
     "jasmine-core": "^2.5.2",
     "karma": "^1.6.0",
     "karma-chrome-launcher": "^2.0.0",
@@ -14,7 +15,8 @@
     "karma-sauce-launcher": "^1.1.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
-    "react-scripts": "^0.9.5"
+    "react-scripts": "^0.9.5",
+    "webpack": "1.14.0"
   },
   "dependencies": {
     "axios": "^0.16.1",
@@ -28,7 +30,9 @@
     "test:iframe": "karma start ./karma.iframe.conf.js",
     "test:chrome": "karma start ./karma.chrome.conf.js",
     "test": "npm run test:chrome && npm run test:iframe",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:extension": "webpack ../extension/extension.js ../extension/build/extension.js",
+    "prepublish": "npm run build:extension && crx pack -o apiary.crx ../extension"
   },
   "proxy": "http://localhost:3001/"
 }
