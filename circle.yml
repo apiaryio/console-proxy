@@ -10,19 +10,21 @@ machine:
     api.xyz.com: 127.0.0.1
     console.apiary.dev: 127.0.0.1
 
-checkout:
+dependencies:
   post:
     - echo 'NODE_ENV=CI' > .env && cd server && npm install
 
-dependencies:
   cache_directories:
     - "server/node_modules"
 
 test:
   pre:
+<<<<<<< HEAD
     - npm run build:extension
     - cd server && npm start:
         background: true
+=======
+>>>>>>> Create the crx file for publish extension
     - npm start:
         background: true
 
