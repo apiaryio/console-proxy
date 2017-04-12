@@ -11,6 +11,14 @@ class Seed extends Component {
   }
 
   componentWillUnmount() {
+    this.destroyFrame();
+  }
+  
+  componentWillUpdate() {
+    this.destroyFrame();
+  }
+  
+  destroyFrame() {
     if (this.useIFrame) {
       if (this.iframe) {
         this.iframe.removeEventListener('load', this.iframeLoaded);
