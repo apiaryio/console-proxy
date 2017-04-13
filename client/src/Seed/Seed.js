@@ -8,16 +8,26 @@ class Seed extends Component {
   constructor(props) {
     super(props);
     this.useIframe = (this.props.seedUrl.startsWith('http:') || this.props.seedUrl.startsWith('https:'));
+    this.iframeLoaded = this.iframeLoaded.bind(this);
   }
 
   componentWillUnmount() {
-    if (this.useIFrame) {
+    this.destroyFrame();
+  }
+
+  componentWillUpdate() {
+    this.destroyFrame();
+  }
+
+  destroyFrame() {
+    if (this.useIframe) {
       if (this.iframe) {
         this.iframe.removeEventListener('load', this.iframeLoaded);
       }
 
       if (this.channel) {
         this.channel.destroy();
+        this.channel = undefined;
       }
     }
   }
@@ -91,7 +101,7 @@ class Seed extends Component {
         width="0"
         frameBorder="0"
         sandbox="allow-scripts allow-same-origin"
-        ref={(iframe) => { if (iframe) { this.iframe = iframe; iframe.addEventListener('load', () => this.iframeLoaded(), false); } } }
+        ref={(iframe) => { if (iframe) { this.iframe = iframe; iframe.addEventListener('load', this.iframeLoaded, false); } } }
         >
       </iframe> : null
     );
