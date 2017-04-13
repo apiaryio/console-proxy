@@ -8,6 +8,7 @@ class Seed extends Component {
   constructor(props) {
     super(props);
     this.useIframe = (this.props.seedUrl.startsWith('http:') || this.props.seedUrl.startsWith('https:'));
+    this.iframeLoaded = this.iframeLoaded.bind(this);
   }
 
   componentWillUnmount() {
@@ -100,7 +101,7 @@ class Seed extends Component {
         width="0"
         frameBorder="0"
         sandbox="allow-scripts allow-same-origin"
-        ref={(iframe) => { if (iframe) { this.iframe = iframe; iframe.addEventListener('load', () => this.iframeLoaded(), false); } } }
+        ref={(iframe) => { if (iframe) { this.iframe = iframe; iframe.addEventListener('load', this.iframeLoaded, false); } } }
         >
       </iframe> : null
     );
