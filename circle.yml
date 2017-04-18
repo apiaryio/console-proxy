@@ -11,6 +11,7 @@ machine:
 
 dependencies:
   post:
+    - cd extension && echo $CHROME_EXTENSION_RSA_KEY > key.pem
     - cd client && echo 'NODE_ENV=CI' > .env && npm install
 
   cache_directories:
@@ -20,3 +21,6 @@ test:
   pre:
     - npm start:
         background: true
+
+  post:
+    - cd client && npm run prepublish

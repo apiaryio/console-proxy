@@ -32,7 +32,7 @@
     "test": "npm run test:chrome && npm run test:iframe",
     "eject": "react-scripts eject",
     "build:extension": "webpack ../extension/extension.js ../extension/build/extension.js",
-    "prepublish": "npm run build:extension && crx pack -o apiary.crx ../extension"
+    "prepublish": "npm run build:extension && crx pack -o apiary.crx ../extension -p ../extension/key.pem"
   },
   "proxy": "http://localhost:3001/"
 }
