@@ -13,11 +13,12 @@ machine:
     console.apiary.dev: 127.0.0.1
 
 dependencies:
+  pre:
+    - sudo apt-get install jq
   post:
     - echo 'NODE_ENV=CI' > .env && cd server && npm install
     - cd extension && echo $CHROME_EXTENSION_RSA_KEY > key.pem
     - cd client && echo 'NODE_ENV=CI' > .env && npm install
-    - cd client && zip -u apiary.zip ../extension/key.pem -j
 
   cache_directories:
     - "server/node_modules"
@@ -30,10 +31,14 @@ test:
     - npm start:
         background: true
 
+  post:
+    - jq 'del(.key)' ./extension/manifest.json > tmp.$$.json && mv tmp.$$.json ./extension/manifest.json
+    - cd client && npm run prepublish
+    - cd client && zip -u apiary.zip ../extension/key.pem -j
+
 deployment:
   production:
     branch: master
     commands:
       - npm run semantic-release || true
-  post:
-    - cd client && npm run prepublish
+
