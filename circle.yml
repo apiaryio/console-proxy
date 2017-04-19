@@ -6,7 +6,7 @@ general:
 
 machine:
   node:
-    version: 7.2.0
+    version: 7.9.0
 
   hosts:
     api.xyz.com: 127.0.0.1
@@ -17,7 +17,7 @@ dependencies:
     - echo 'NODE_ENV=CI' > .env && cd server && npm install
     - cd extension && echo $CHROME_EXTENSION_RSA_KEY > key.pem
     - cd client && echo 'NODE_ENV=CI' > .env && npm install
-    - cd client && zip -u apiary.zip ../extension/key.pem
+    - cd client && zip -u apiary.zip ../extension/key.pem -j
 
   cache_directories:
     - "server/node_modules"
