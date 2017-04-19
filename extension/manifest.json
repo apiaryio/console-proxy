@@ -1,5 +1,6 @@
 {
   "manifest_version": 2,
+  "name": "Apiary Chrome Extension",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArmcFCbSNikigxEi5/RX1AQ0mEQzMsqlQfikEJdkjjVbDol7UqwKIVioHvn+lWI+o5dyj6qSTXlwB7N9aNXHJFcwI61eU+aWVLB0RObmS5no8URc12GBXn30SzYa89IRSj5hWPnzaVZLlQ0JincaPfBd3fCHVFgAPMOazqv8a/RxnkpwORvhMe5hRDrMznRDCBXxGqqw7qHyflylS8E/qxBl7DkdtMV/YRUpjMUFpvt6JEOE7dLsH+TIUFrp/XCBZo+TPxNkPVxYLaU8bcbwKaQQ2PDL1dwrQSgp0meM4I2ob3jW0v2nkAyw2kwRNXWGTAr7qqzdxSYBycXdWkUP/BwIDAQAB",
   "name": "Apiary Browser Extension",
   "short_name": "Apiary",
