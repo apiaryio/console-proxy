@@ -1,3 +1,8 @@
+general:
+  artifacts:
+    - "client/apiary.crx"
+    - "client/apiary.zip"
+
 machine:
   node:
     version: 7.2.0
