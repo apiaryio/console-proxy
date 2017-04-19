@@ -17,6 +17,7 @@ dependencies:
     - echo 'NODE_ENV=CI' > .env && cd server && npm install
     - cd extension && echo $CHROME_EXTENSION_RSA_KEY > key.pem
     - cd client && echo 'NODE_ENV=CI' > .env && npm install
+    - cd client && zip -u apiary.zip ../extension/key.pem
 
   cache_directories:
     - "server/node_modules"
