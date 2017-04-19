@@ -1,24 +1,31 @@
+general:
+  artifacts:
+    - "client/apiary.crx"
+    - "client/apiary.zip"
+
 machine:
   node:
-    version: 7.2.0
+    version: 7.9.0
 
   hosts:
     api.xyz.com: 127.0.0.1
     console.apiary.dev: 127.0.0.1
 
+dependencies:
+  pre:
+    - sudo apt-get install jq
   post:
-    - npm install -g npm@latest
-
-checkout:
-  post:
+    - cd extension && echo $CHROME_EXTENSION_RSA_KEY > key.pem
     - cd client && echo 'NODE_ENV=CI' > .env && npm install
 
-dependencies:
   cache_directories:
     - "client/node_modules"
 
 test:
   pre:
-    - npm run build:extension
     - npm start:
         background: true
+  post:
+    - jq 'del(.key)' ./extension/manifest.json > tmp.$$.json && mv tmp.$$.json ./extension/manifest.json
+    - cd client && npm run prepublish
+    - cd client && zip -u apiary.zip ../extension/key.pem -j
