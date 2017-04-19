@@ -26,7 +26,14 @@ chan.bind('httpRequest', (trans, requestOptions) => {
     })
 })
 
-chrome.runtime.onMessageExternal.addListener(({ method, params }, sender, sendResponse) => {
+let messageHandler = null;
+
+if (typeof(browser) !== 'undefined')
+  messageHandler = browser.runtime.onMessage;
+else
+  messageHandler = chrome.runtime.onMessageExternal;
+
+messageHandler.addListener(({ method, params }, sender, sendResponse) => {
   chan.call({
     method,
     params,
