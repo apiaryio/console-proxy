@@ -12,10 +12,11 @@ machine:
     console.apiary.dev: 127.0.0.1
 
 dependencies:
+  pre:
+    - sudo apt-get install jq
   post:
     - cd extension && echo $CHROME_EXTENSION_RSA_KEY > key.pem
     - cd client && echo 'NODE_ENV=CI' > .env && npm install
-    - cd client && zip -u apiary.zip ../extension/key.pem -j
 
   cache_directories:
     - "client/node_modules"
@@ -24,6 +25,7 @@ test:
   pre:
     - npm start:
         background: true
-
   post:
+    - jq 'del(.key)' ./extension/manifest.json > tmp.$$.json && mv tmp.$$.json ./extension/manifest.json
     - cd client && npm run prepublish
+    - cd client && zip -u apiary.zip ../extension/key.pem -j
