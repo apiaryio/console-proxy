@@ -1,6 +1,8 @@
 general:
   artifacts:
     - "extension/"
+    - "apiary.crx"
+    - "apiary.zip"
 
 machine:
   node:
