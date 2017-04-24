@@ -7,6 +7,7 @@ webpackConfig.devtool = 'inline-source-map';
 webpackConfig.plugins.push(new DefinePlugin({
   DOMAIN: JSON.stringify('apiary.dev')
 }));
+webpackConfig.module.preLoaders = [];
 
 
 module.exports = function (config) {
