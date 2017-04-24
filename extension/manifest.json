@@ -10,8 +10,9 @@
   },
   "externally_connectable": {
     "matches": [
-      "http://localhost:*/*",
-      "https://localhost:*/*"
+      "*://localhost:*/*",
+      "*://*.apiary.io/*",
+      "*://*.apiary-staging.in/*"
     ]
   },
   "background": {
