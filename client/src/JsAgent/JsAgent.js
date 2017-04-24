@@ -41,13 +41,13 @@ Apiary.createAgent = function createAgent({ subdomains }) {
 
     const origin = new URI({
       protocol: 'http',
-      hostname: DOMAIN
+      hostname: DOMAIN,
     }).subdomain(`docs.${subdomain}`);
 
     const jsapiOrigin = new URI({
       protocol: 'https',
       path: subdomain,
-      hostname: DOMAIN
+      hostname: DOMAIN,
     }).subdomain('jsapi');
 
     Apiary.channels.push(buildChannel(origin.toString(), subdomain));

@@ -3,7 +3,7 @@ import '../JsAgent';
 describe('non array subdomains parameter', () => {
   it('should throw an exception', () => {
     expect(() => window.Apiary.createAgent({ subdomains: 'mysubdomain' })).toThrow();
-  })
+  });
 });
 
 describe('single channel creation', () => {
@@ -17,7 +17,7 @@ describe('single channel creation', () => {
 
   it('should create 2 channels', () => {
     expect(window.Apiary.channels.length).toBe(2);
-  })
+  });
 });
 
 describe('multiple channel creation', () => {
@@ -31,5 +31,5 @@ describe('multiple channel creation', () => {
 
   it('should create 4 channels', () => {
     expect(window.Apiary.channels.length).toBe(4);
-  })
+  });
 });
