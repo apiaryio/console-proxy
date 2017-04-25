@@ -5,7 +5,9 @@ const DefinePlugin = require('webpack/lib/DefinePlugin')
 var webpackConfig = require(path.join(__dirname, './node_modules/react-scripts/config/webpack.config.dev.js'));
 webpackConfig.devtool = 'inline-source-map';
 webpackConfig.plugins.push(new DefinePlugin({
-  DOMAIN: JSON.stringify('apiary.dev')
+  DOMAIN: JSON.stringify('apiary.dev'),
+  PORT: 80,
+  SSL_PORT: 443
 }));
 webpackConfig.module.preLoaders = [];
 
