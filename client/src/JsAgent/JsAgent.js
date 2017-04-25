@@ -33,8 +33,8 @@ const buildChannel = Apiary.buildChannel = function buildChannel(origin, scope) 
 };
 
 Apiary.createAgent = function createAgent({ subdomains }) {
-  if (!Array.isArray(subdomains)) {
-    throw new Error('subdomains property must be an array');
+  if (!Array.isArray(subdomains) || subdomains.length < 1) {
+    throw new Error('subdomains property must be an array with at least one element');
   }
 
   subdomains.forEach((subdomain) => {

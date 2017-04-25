@@ -6,6 +6,12 @@ describe('non array subdomains parameter', () => {
   });
 });
 
+describe('empty array subdomains parameter', () => {
+  it('should throw an exception', () => {
+    expect(() => window.Apiary.createAgent({ subdomains: [] })).toThrow();
+  });
+});
+
 describe('single channel creation', () => {
   beforeEach(() => {
     window.Apiary.createAgent({ subdomains: ['mysubdomain'] });
