@@ -43,14 +43,20 @@ Apiary.createAgent = function createAgent({ subdomains }) {
       protocol: 'http',
       hostname: DOMAIN,
     }).subdomain(`docs.${subdomain}`)
-      .port(PORT);
+
+    if (PORT){
+      origin.port(PORT);
+    }
 
     const jsapiOrigin = new URI({
       protocol: 'https',
       path: subdomain,
       hostname: DOMAIN,
     }).subdomain('jsapi')
-      .port(SSL_PORT);
+
+    if (SSL_PORT) {
+      jsapiOrigin.port(SSL_PORT);
+    }
 
     Apiary.channels.push(buildChannel(origin.toString(), subdomain));
     Apiary.channels.push(buildChannel(jsapiOrigin.toString(), subdomain));
