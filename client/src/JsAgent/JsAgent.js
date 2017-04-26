@@ -1,3 +1,7 @@
+const axios = require('axios');
+const Channel = require('jschannel');
+const URI = require('urijs');
+
 const instance = axios.create({
   validateStatus: () => true
 });

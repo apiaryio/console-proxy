@@ -1,6 +1,6 @@
 {
   "name": "@apiaryio/console-proxy",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "src/Seed/Seed",
   "devDependencies": {
     "classnames": "^2.2.5",
@@ -20,7 +20,8 @@
     "axios": "^0.16.0",
     "jschannel": "^1.0.2",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "urijs": "^1.18.10"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -12,7 +12,6 @@
     "test:sauce": "wdio ./wdio.sauce.conf.js",
     "test:local": "wdio",
     "start": "concurrently -r -p none \"node index.js\" \"cd client && npm start\"",
-    "deploy": "concurrently -r -p none \"git push -f heroku master\" \"cd client && npm run deploy\"",
     "chromedriver": "chromedriver --port=4444 --url-base=/wd/hub",
     "build:extension": "webpack ./extension/extension.js ./extension/build/extension.js"
   },
