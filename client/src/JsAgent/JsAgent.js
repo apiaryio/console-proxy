@@ -10,7 +10,7 @@ const Apiary = window.Apiary || {};
 Apiary.channels = [];
 
 //This function is exposed for testing purposes.
-const buildChannel = Apiary.buildChannel = function buildChannel(origin, scope) {
+const buildChannel = Apiary.buildChannel = function (origin, scope) {
   const chan = Channel.build({
     window: window.parent,
     origin: origin,

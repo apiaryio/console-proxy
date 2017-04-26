@@ -6,7 +6,7 @@ const Apiary = window.Apiary || {};
 Apiary.channels = [];
 
 //This function is exposed for testing purposes.
-const buildChannel = Apiary.buildChannel = function buildChannel(origin, scope) {
+const buildChannel = Apiary.buildChannel = function (origin, scope) {
   const chan = Channel.build({
     window: window.parent,
     origin: origin,
@@ -29,8 +29,8 @@ const buildChannel = Apiary.buildChannel = function buildChannel(origin, scope) 
 };
 
 Apiary.createAgent = function createAgent({ subdomains }) {
-  if (!Array.isArray(subdomains)) {
-    throw new Error('subdomains property must be an array');
+  if (!Array.isArray(subdomains) || subdomains.length < 1) {
+    throw new Error('subdomains property must be an array with at least one element');
   }
 
   subdomains.forEach((subdomain) => {
@@ -38,13 +38,21 @@ Apiary.createAgent = function createAgent({ subdomains }) {
     const origin = new URI({
       protocol: 'http',
       hostname: DOMAIN,
-    }).subdomain(`docs.${subdomain}`);
+    }).subdomain(`docs.${subdomain}`)
+
+    if (PORT){
+      origin.port(PORT);
+    }
 
     const jsapiOrigin = new URI({
       protocol: 'https',
       path: subdomain,
       hostname: DOMAIN,
-    }).subdomain('jsapi');
+    }).subdomain('jsapi')
+
+    if (SSL_PORT) {
+      jsapiOrigin.port(SSL_PORT);
+    }
 
     Apiary.channels.push(buildChannel(origin.toString(), subdomain));
     Apiary.channels.push(buildChannel(jsapiOrigin.toString(), subdomain));
