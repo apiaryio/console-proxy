@@ -28,23 +28,22 @@ function checkResponseData(res) {
 
 describe('Component interface test', () => {
   let seed = undefined;
+  let containerElement = undefined;
 
   beforeAll(() => {
-    const div = document.createElement('div');
-    div.setAttribute('id', 'container');
-    document.body.appendChild(div);
+    containerElement = document.createElement('div');
+    containerElement.setAttribute('id', 'container');
+    document.body.appendChild(containerElement);
   });
 
   afterEach(() => {
-    ReactDOM.unmountComponentAtNode(document.getElementById('container'));
+    ReactDOM.unmountComponentAtNode(containerElement);
   });
 
   describe('seed with everything set (Chrome)', () => {
 
     beforeAll((done) => {
-      seed = ReactDOM.render(<Seed onReady={done} seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf"/>,
-        document.getElementById('container')
-      );
+      seed = ReactDOM.render(<Seed onReady={done} seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf" />, containerElement);
     });
 
     it('valid http request', (done) => {
@@ -58,5 +57,25 @@ describe('Component interface test', () => {
 
   });
 
-});
+  describe('change method from iframe to extension and vice versa', () => {
+    describe('from iframe to extension', () => {
+      it('should find an iframe', () => {
+        seed = ReactDOM.render(<Seed seedUrl="https://www.google.it" />, containerElement);
+        expect(document.querySelectorAll('#container iframe').length).toBe(1);
 
+        seed = ReactDOM.render(<Seed seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf" />, containerElement);
+        expect(document.querySelectorAll('#container iframe').length).toBe(0);
+      });
+    });
+
+    describe('from extension to iframe', () => {
+      it('should not find an iframe', () => {
+        seed = ReactDOM.render(<Seed seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf" />, containerElement);
+        expect(document.querySelectorAll('#container iframe').length).toBe(0);
+
+        seed = ReactDOM.render(<Seed seedUrl="https://www.google.it" />, containerElement);
+        expect(document.querySelectorAll('#container iframe').length).toBe(1);
+      })
+    });
+  });
+});
