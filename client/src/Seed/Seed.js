@@ -121,4 +121,5 @@ Seed.defaultProps = {
   debugOutput: false
 }
 
+export { Seed };
 export default Seed;
