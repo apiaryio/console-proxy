@@ -40,7 +40,7 @@ class Seed extends Component {
             this.ready = true;
             this.props.onReady && this.props.onReady();
           } else {
-            this.props.onReady && this.props.onReady(new Error(window.chrome.runtime.lastError));
+            this.props.onReady && this.props.onReady(window.chrome.runtime.lastError);
           }
         });
       }
