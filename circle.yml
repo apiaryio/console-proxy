@@ -6,9 +6,6 @@ machine:
     api.xyz.com: 127.0.0.1
     console.apiary.dev: 127.0.0.1
 
-  post:
-    - npm install -g npm@latest
-
 checkout:
   post:
     - cd client && echo 'NODE_ENV=CI' > .env && npm install
