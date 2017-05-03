@@ -40,6 +40,20 @@ describe('Component interface test', () => {
     ReactDOM.unmountComponentAtNode(containerElement);
   });
 
+  describe('seed with non installed extension', () => {
+    let _err = undefined;
+
+    beforeAll((done) => {
+      seed = ReactDOM.render(<Seed onReady={(err) => { _err = err; done(); }} seedUrl="NonExistingExtensionId" />, containerElement);
+
+    });
+
+    it('should return an error message', () => {
+      expect(_err).toBeDefined();
+    });
+
+  });
+
   describe('seed with everything set (Chrome)', () => {
 
     beforeAll((done) => {

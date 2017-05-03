@@ -53,10 +53,11 @@ describe('Component interface test', () => {
 
 
   describe('request with a non existent seed page', () => {
-    beforeAll(() => {
+    beforeAll((done) => {
       seed = ReactDOM.render(<Seed
         scope="apiary"
         seedUrl="https://apiary.xyz"
+        onReady={done}
         />, document.getElementById('container'));
     })
 
@@ -65,10 +66,15 @@ describe('Component interface test', () => {
   });
 
   describe('seed with invalid origin', () => {
-    beforeAll(() => {
+    beforeAll((done) => {
       seed = ReactDOM.render(<Seed
         scope="apiary"
         seedUrl="http://localhost:3001/apiary/proxy"
+        onReady={(err)=>{
+          if (err)
+            return done();
+          return done(new Error('The component should not be initalised correctly'));
+        }}
         origin="invalidOrigin"
         />, document.getElementById('container'));
     });
@@ -78,10 +84,15 @@ describe('Component interface test', () => {
   });
 
   describe('seed with a non matching scope', () => {
-    beforeAll(() => {
+    beforeAll((done) => {
       seed = ReactDOM.render(<Seed
         scope="apiary"
         seedUrl="http://localhost:3001/apiary/proxy"
+        onReady={(err)=>{
+          if (err)
+            return done();
+          return done(new Error('The component should not be initalised correctly'));
+        }}
         origin="*"
         />, document.getElementById('container'));
     });
