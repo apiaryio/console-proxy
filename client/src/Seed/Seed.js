@@ -7,7 +7,6 @@ class Seed extends Component {
 
   constructor(props) {
     super(props);
-    this.useIframe = (this.props.seedUrl.startsWith('http:') || this.props.seedUrl.startsWith('https:'));
     this.iframeLoaded = this.iframeLoaded.bind(this);
   }
 
@@ -101,6 +100,9 @@ class Seed extends Component {
   }
 
   render() {
+
+    this.useIframe = (this.props.seedUrl.startsWith('http:') || this.props.seedUrl.startsWith('https:'));
+
     return (this.useIframe ?
       <iframe
         src={this.props.seedUrl}
