@@ -65,12 +65,10 @@ class App extends Component {
           ref={(s) => { this.Seed = s } }
           seedUrl={`${getBaseUrl()}/apiary/proxy`}
           scope="apiary-console"
-          onReady={() => { console.info('Iframe Seed is ready to communicate'); } }
           />
         <Seed
           ref={(s) => { this.chromeSeed = s } }
           seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf"
-          onReady={() => { console.info('Chrome Seed is ready to communicate'); } }
           />
         <div className="App-header">
           <img src={logo} className={classNames('App-logo', { 'App-logo--loaded': this.state })} alt="logo" />

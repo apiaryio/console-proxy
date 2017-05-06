@@ -70,10 +70,9 @@ serving page. Ignored when `seedUrl` is null, as the Chrome extension provides i
 `debugOutput`: Whether you want or not to output logs from `jschannel` library)
 
 `onReady`: Callback called once actual communication has been established between
-the parent page and child frame. If the child frame hadn't set up its end of the
-channel, for instance, `onReady` would never get called. The same goes with Chrome
-extension: if it's not installed, the callback would never get called.
-If you do not get this call, you *shouldn't* use the component.
+the parent page and child frame, with an `Error` object passed if something went
+wrong during the process. In case of Chrome extension, it will return an error
+object with the actual `window.chrome.runtime.lastError`
 
 Once you've "rendered" an instance of the component, you can send requests throught
 its instance method `request`. In order to use it, you might want to save the

@@ -7,7 +7,6 @@ class Seed extends Component {
 
   constructor(props) {
     super(props);
-    this.useIframe = (this.props.seedUrl.startsWith('http:') || this.props.seedUrl.startsWith('https:'));
     this.iframeLoaded = this.iframeLoaded.bind(this);
   }
 
@@ -39,6 +38,8 @@ class Seed extends Component {
           if (reply && reply.pong) {
             this.ready = true;
             this.props.onReady && this.props.onReady();
+          } else {
+            this.props.onReady && this.props.onReady(window.chrome.runtime.lastError);
           }
         });
       }
@@ -81,19 +82,27 @@ class Seed extends Component {
   }
 
   iframeLoaded() {
-    this.channel = Channel.build({
-      window: this.iframe.contentWindow,
-      origin: this.props.origin,
-      scope: this.props.scope,
-      debugOutput: this.props.debugOutput,
-      onReady: () => {
-        this.ready = true;
-        this.props.onReady && this.props.onReady();
-      }
-    });
+    try {
+      this.channel = Channel.build({
+        window: this.iframe.contentWindow,
+        origin: this.props.origin,
+        scope: this.props.scope,
+        debugOutput: this.props.debugOutput,
+        onReady: () => {
+          this.ready = true;
+          this.props.onReady && this.props.onReady();
+        }
+      });
+    } catch (ex) {
+      this.ready = false;
+      this.props.onReady && this.props.onReady(new Error(ex));
+    }
   }
 
   render() {
+
+    this.useIframe = (this.props.seedUrl.startsWith('http:') || this.props.seedUrl.startsWith('https:'));
+
     return (this.useIframe ?
       <iframe
         src={this.props.seedUrl}
@@ -121,4 +130,5 @@ Seed.defaultProps = {
   debugOutput: false
 }
 
+export { Seed };
 export default Seed;
