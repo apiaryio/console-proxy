@@ -24,7 +24,7 @@ app.use(cors());
 app.get('/apiary/proxy', (req, res) => {
   setTimeout(() => {
     res.render('serve-seed.ejs', {
-      seedUrl: process.env.APIARY_SEED_URL || 'http://localhost:3000',
+      seedUrl: process.env.APIARY_SEED_URL || 'http://localhost:3001',
       seedScope: req.query.scope || 'apiary-console',
       seedOrigin: req.query.origin || '*'
     });

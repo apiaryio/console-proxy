@@ -47,7 +47,7 @@ describe('Status Codes', () => {
         done();
       };
 
-      seed.request({ url: `http://localhost:3000/statuses/${item.code}` })
+      seed.request({ url: `http://localhost:3001/statuses/${item.code}` })
         .then(handleResponse, (err) => { handleResponse(err.response); });
     }, 5000);
   });
