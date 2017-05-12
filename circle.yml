@@ -8,7 +8,7 @@ machine:
 
 checkout:
   post:
-    - echo 'NODE_ENV=CI' > .env && cd server &&  npm install
+    - echo 'NODE_ENV=CI' > .env && cd server && npm install
 
 dependencies:
   cache_directories:
@@ -19,3 +19,11 @@ test:
     - npm run build:extension
     - cd server && npm start:
         background: true
+    - npm start:
+        background: true
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run semantic-release || true
