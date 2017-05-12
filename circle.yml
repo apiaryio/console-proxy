@@ -8,14 +8,14 @@ machine:
 
 checkout:
   post:
-    - cd client && echo 'NODE_ENV=CI' > .env && npm install
+    - echo 'NODE_ENV=CI' > .env && cd server &&  npm install
 
 dependencies:
   cache_directories:
-    - "client/node_modules"
+    - "server/node_modules"
 
 test:
   pre:
     - npm run build:extension
-    - npm start:
+    - cd server && npm start:
         background: true
