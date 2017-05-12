@@ -10,7 +10,7 @@ const createResponseObject = (req) => {
     id: req.params.id,
     name: 'Vincenzo',
     surname: 'Chianese',
-    age: 27 // Ahi Ahi, getting older
+    age: 28 // Ahi Ahi, getting older
   }, req.body);
 }
 
