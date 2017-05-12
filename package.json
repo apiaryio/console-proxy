@@ -1,6 +1,6 @@
 {
   "name": "@apiaryio/console-proxy",
-  "version": "1.0.1",
+  "version": "0.0.0-semantically-released",
   "main": "src/Seed/Seed",
   "devDependencies": {
     "classnames": "^2.2.5",
