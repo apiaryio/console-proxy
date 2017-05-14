@@ -1,6 +1,6 @@
 {
   "name": "apiary-console-seed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "client/src/Seed/Seed.js",
   "engines": {
