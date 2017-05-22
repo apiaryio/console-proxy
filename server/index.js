@@ -31,10 +31,6 @@ app.get('/apiary/proxy', (req, res) => {
   }, req.query.timeout || 0);
 });
 
-app.get('/fixture.html', (req, res) => {
-  res.sendFile(path.join(__dirname, './test/fixtures/index.html'));
-});
-
 app.use(routes);
 app.use(bodyParser.json());
 
