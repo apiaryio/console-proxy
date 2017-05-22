@@ -3,6 +3,9 @@
   "version": "0.0.0-semantically-released",
   "main": "src/Seed/Seed",
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.0",
     "classnames": "^2.2.5",
     "condition-circle": "^1.5.0",
     "jasmine-core": "^2.5.2",
@@ -15,7 +18,7 @@
     "karma-sauce-launcher": "^1.1.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
-    "react-scripts": "^0.9.5",
+    "react-scripts": "^1.0.4",
     "semantic-release": "^6.3.2"
   },
   "dependencies": {
@@ -28,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:extension": "webpack ./extension/extension.js ./extension/build/extension.js",
+    "build:extension": "webpack -p --module-bind js=babel-loader ./extension/extension.js ./extension/build/extension.js",
     "test:iframe": "karma start ./karma.iframe.conf.js",
     "test:chrome": "karma start ./karma.chrome.conf.js",
     "test": "npm run test:chrome && npm run test:iframe",
