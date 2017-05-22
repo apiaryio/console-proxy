@@ -31,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:extension": "webpack -p --module-bind js=babel-loader ./extension/extension.js ./extension/build/extension.js",
+    "build:extension": "webpack -p --module-bind js=babel-loader --devtool=source-map ./extension/extension.js ./extension/build/extension.js",
     "test:iframe": "karma start ./karma.iframe.conf.js",
     "test:chrome": "karma start ./karma.chrome.conf.js",
     "test": "npm run test:chrome && npm run test:iframe",
