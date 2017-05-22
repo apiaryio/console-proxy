@@ -10,7 +10,7 @@ const createResponseObject = (req) => {
     id: req.params.id,
     name: 'Vincenzo',
     surname: 'Chianese',
-    age: 27 // Ahi Ahi, getting older
+    age: 28 // Ahi Ahi, getting older
   }, req.body);
 }
 
@@ -29,10 +29,6 @@ app.get('/apiary/proxy', (req, res) => {
       seedOrigin: req.query.origin || '*'
     });
   }, req.query.timeout || 0);
-});
-
-app.get('/fixture.html', (req, res) => {
-  res.sendFile(path.join(__dirname, './test/fixtures/index.html'));
 });
 
 app.use(routes);

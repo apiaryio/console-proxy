@@ -12,7 +12,7 @@ module.exports = function (config) {
     customLaunchers: {
       ex_Chrome: {
         base: 'Chrome',
-        flags: ['--load-extension=../extension']
+        flags: ['--load-extension=./extension']
       }
     },
   });

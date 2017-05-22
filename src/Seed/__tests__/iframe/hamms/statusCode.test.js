@@ -13,8 +13,10 @@ describe('Status Codes', () => {
     document.body.appendChild(div);
 
     seed = ReactDOM.render(<Seed
+      scope="apiary-console"
+      seedUrl="http://localhost:3001/apiary/proxy"
+      origin="*"
       onReady={done}
-      seedUrl="ijlncpebbpeeagehccegnddhhdgcaflf"
       />, document.getElementById('container'));
   });
 
@@ -45,7 +47,7 @@ describe('Status Codes', () => {
         done();
       };
 
-      seed.request({ url: `http://localhost:3000/statuses/${item.code}` })
+      seed.request({ url: `http://localhost:3001/statuses/${item.code}` })
         .then(handleResponse, (err) => { handleResponse(err.response); });
     }, 5000);
   });

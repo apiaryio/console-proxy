@@ -1,3 +1,7 @@
+general:
+  artifacts:
+    - "extension/"
+
 machine:
   node:
     version: 7.2.0
@@ -8,14 +12,22 @@ machine:
 
 checkout:
   post:
-    - cd client && echo 'NODE_ENV=CI' > .env && npm install
+    - echo 'NODE_ENV=CI' > .env && cd server && npm install
 
 dependencies:
   cache_directories:
-    - "client/node_modules"
+    - "server/node_modules"
 
 test:
   pre:
     - npm run build:extension
+    - cd server && npm start:
+        background: true
     - npm start:
         background: true
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run semantic-release || true

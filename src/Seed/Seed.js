@@ -105,6 +105,7 @@ class Seed extends Component {
 
     return (this.useIframe ?
       <iframe
+        title="seed"
         src={this.props.seedUrl}
         height="0"
         width="0"
