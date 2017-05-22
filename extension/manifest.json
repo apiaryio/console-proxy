@@ -26,5 +26,8 @@
   "permissions": [
     "http://*/*",
     "https://*/*"
+  ],
+ "web_accessible_resources": [
+    "icon16.png"
   ]
 }
