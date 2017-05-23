@@ -23,6 +23,18 @@
     ],
     "persistent": false
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://localhost:*/*",
+        "*://*.apiary.io/*",
+        "*://*.apiary-staging.in/*"
+      ],
+      "js": [
+        "build/detect.js"
+      ]
+    }
+  ],
   "permissions": [
     "http://*/*",
     "https://*/*"
