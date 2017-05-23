@@ -92,4 +92,10 @@ describe('Component interface test', () => {
       })
     });
   });
+
+  describe('extension detection', () => {
+    it('should find a secret DOM node in the page', () => {
+      expect(document.getElementById('apiary-browser-extension')).toBeDefined();
+    });
+  });
 });
