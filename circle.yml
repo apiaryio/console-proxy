@@ -1,9 +1,7 @@
 general:
   artifacts:
     - "extension/"
-    - "apiary.crx"
     - "apiary.zip"
-    - "apiary_nokey.zip"
 
 machine:
   node:
@@ -16,10 +14,9 @@ machine:
 dependencies:
   pre:
     - sudo apt-get install jq
+
   post:
     - echo 'NODE_ENV=CI' > .env && cd server && npm install
-    - cd extension && echo $CHROME_EXTENSION_RSA_KEY > key.pem
-    - cd client && echo 'NODE_ENV=CI' > .env && npm install
 
   cache_directories:
     - "server/node_modules"
@@ -35,9 +32,7 @@ test:
   post:
     # Remove the testing 'key' field from manifest.json, because the final one will be computed by the Chrome Store.
     - jq 'del(.key)' ./extension/manifest.json > tmp.$$.json && mv tmp.$$.json ./extension/manifest.json
-    - cd client && cp apiary.zip apiary_nokey.zip
-    - cd client && npm run prepublish
-    - cd client && zip -u apiary.zip ../extension/key.pem -j
+    - zip -r apiary.zip ./extension/
 
 deployment:
   production:
