@@ -1,20 +1,23 @@
 general:
   artifacts:
     - "extension/"
+    - "apiary.zip"
 
 machine:
   node:
-    version: 7.2.0
+    version: 7.9.0
 
   hosts:
     api.xyz.com: 127.0.0.1
     console.apiary.dev: 127.0.0.1
 
-checkout:
+dependencies:
+  pre:
+    - sudo apt-get install jq
+
   post:
     - echo 'NODE_ENV=CI' > .env && cd server && npm install
 
-dependencies:
   cache_directories:
     - "server/node_modules"
 
@@ -26,8 +29,14 @@ test:
     - npm start:
         background: true
 
+  post:
+    # Remove the testing 'key' field from manifest.json, because the final one will be computed by the Chrome Store.
+    - jq 'del(.key)' ./extension/manifest.json > tmp.$$.json && mv tmp.$$.json ./extension/manifest.json
+    - zip -r apiary.zip ./extension/
+
 deployment:
   production:
     branch: master
     commands:
       - npm run semantic-release || true
+
