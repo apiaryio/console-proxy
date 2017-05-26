@@ -7,9 +7,13 @@ const chan = Channel.build({
   scope: 'chromeScope',
   remote: 'ping',
   onReady: () => {
-    chan.bind('ping', () => {
-      return { pong: true };
+    chan.bind('ping', (trans) => {
+      trans.delayReturn(true);
+      chrome.tabs.getSelected(null, (tab) => {
+        window.chrome.pageAction.show(tab.id);
+        trans.complete({ pong: true });
     });
+  });
   }
 });
 
