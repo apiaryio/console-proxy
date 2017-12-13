@@ -40,12 +40,12 @@ Apiary.createAgent = function createAgent({ subdomains }) {
   subdomains.forEach((subdomain) => {
 
     const origin = new URI({
-      protocol: 'http',
+      protocol: 'https',
       hostname: DOMAIN,
-    }).subdomain(`docs.${subdomain}`)
+    }).subdomain(`${subdomain}.docs`)
 
-    if (PORT){
-      origin.port(PORT);
+    if (SSL_PORT){
+      origin.port(SSL_PORT);
     }
 
     const jsapiOrigin = new URI({
