@@ -1,6 +1,9 @@
 {
   "name": "@apiaryio/console-proxy",
   "version": "0.0.8",
+  "publishConfig": {
+    "registry": "https://registry.apiary-internal.com/"
+  },
   "main": "src/Seed/Seed",
   "devDependencies": {
     "babel-core": "^6.24.1",
