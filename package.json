@@ -1,6 +1,6 @@
 {
   "name": "@apiaryio/console-proxy",
-  "version": "0.0.0-semantically-released",
+  "version": "0.0.8",
   "main": "src/Seed/Seed",
   "devDependencies": {
     "babel-core": "^6.24.1",
