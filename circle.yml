@@ -9,7 +9,7 @@ machine:
 
   hosts:
     api.xyz.com: 127.0.0.1
-    console.apiary.dev: 127.0.0.1
+    console.apiary.test: 127.0.0.1
 
 dependencies:
   pre:

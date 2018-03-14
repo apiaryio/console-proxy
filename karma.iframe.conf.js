@@ -3,7 +3,7 @@ const path = require('path');
 const DefinePlugin = require('webpack/lib/DefinePlugin')
 
 const defines = {
-  DOMAIN: JSON.stringify('apiary.dev'),
+  DOMAIN: JSON.stringify('apiary.test'),
   PORT: 80,
   SSL_PORT: 443
 }
