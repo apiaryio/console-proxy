@@ -1,6 +1,10 @@
 const axios = require('axios');
 const Channel = require('jschannel');
 
+const instance = axios.create({
+  validateStatus: () => true
+});
+
 const chan = Channel.build({
   window: window,
   origin: '*',
@@ -21,7 +25,7 @@ const chan = Channel.build({
 chan.bind('httpRequest', (trans, requestOptions) => {
   trans.delayReturn(true);
 
-  axios(requestOptions)
+  instance(requestOptions)
     .then(trans.complete)
     .catch((err) => {
       let errorCopy = JSON.parse(JSON.stringify(err));
