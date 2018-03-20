@@ -41,11 +41,11 @@ a method to forward your requests throught the seed.
 
 ```javascript
 Seed.propTypes = {
-  seedUrl: React.PropTypes.string.isRequired,
-  origin: React.PropTypes.string,
-  scope: React.PropTypes.string,
-  debugOutput: React.PropTypes.bool,
-  onReady: React.PropTypes.func
+  seedUrl: PropTypes.string.isRequired,
+  origin: PropTypes.string,
+  scope: PropTypes.string,
+  debugOutput: PropTypes.bool,
+  onReady: PropTypes.func
 };
 ```
 

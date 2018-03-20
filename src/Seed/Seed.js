@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Channel from 'jschannel';
 
 const CHANNEL_NOT_READY = 'CHANNEL_NOT_READY';
@@ -119,11 +120,11 @@ class Seed extends Component {
 }
 
 Seed.propTypes = {
-  seedUrl: React.PropTypes.string.isRequired,
-  origin: React.PropTypes.string,
-  scope: React.PropTypes.string,
-  debugOutput: React.PropTypes.bool,
-  onReady: React.PropTypes.func
+  seedUrl: PropTypes.string.isRequired,
+  origin: PropTypes.string,
+  scope: PropTypes.string,
+  debugOutput: PropTypes.bool,
+  onReady: PropTypes.func
 };
 
 Seed.defaultProps = {
