@@ -85,7 +85,7 @@ been testing it a lot on different http edge cases. You can have a look to
 [node-hamms][8] repository
 
 The returned promise will resolve with an [Axios Response Object][9], or rejected
-with an error, if any occurs during the operation
+according to the [Axios Handling Errors][10] rules.
 
 ### Low level method
 
@@ -117,3 +117,4 @@ const promise = seed.sendMessage({method, params});
 [7]: https://github.com/mzabriskie/axios#request-config
 [8]: https://github.com/apiaryio/node-hamms
 [9]: https://github.com/mzabriskie/axios#response-schema
+[10]: https://github.com/axios/axios#handling-errors
