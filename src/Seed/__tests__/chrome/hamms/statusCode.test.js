@@ -26,6 +26,7 @@ describe('Status Codes', () => {
   const statuses = [
     { code: 200, text: 'OK' },
     { code: 201, text: 'Created' },
+    { code: 204, text: 'No Content' },
     { code: 400, text: 'Bad Request' },
     { code: 401, text: 'Unauthorized' },
     { code: 403, text: 'Forbidden' },
@@ -46,7 +47,8 @@ describe('Status Codes', () => {
       };
 
       seed.request({ url: `http://localhost:3001/statuses/${item.code}` })
-        .then(handleResponse, (err) => { handleResponse(err.response); });
+        .then(handleResponse,
+              done.fail.bind(this, new Error('This promise should not have been rejected')));
     }, 5000);
   });
 });
