@@ -27,8 +27,8 @@
   "dependencies": {
     "axios": "^0.16.0",
     "jschannel": "^1.0.2",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "react": "=15.4.2",
+    "react-dom": "=15.4.2",
     "urijs": "^1.18.10"
   },
   "repository": {
