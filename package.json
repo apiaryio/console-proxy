@@ -1,6 +1,6 @@
 {
   "name": "@apiaryio/console-proxy",
-  "version": "0.0.8",
+  "version": "0.0.8-semantic-release",
   "publishConfig": {
     "registry": "https://registry.apiary-internal.com/"
   },
