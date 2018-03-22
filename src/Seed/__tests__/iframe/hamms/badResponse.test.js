@@ -29,7 +29,7 @@ describe('Bad response', () => {
         expect(err.code).toBe('ECONNABORTED');
         done();
       });
-  }, 35000);
+  }, 75000);
 
   // Server sends back an empty string immediately upon connection
   it('should handle empty response gracefully (GET)', (done) => {
@@ -43,7 +43,7 @@ describe('Bad response', () => {
 
         done();
       });
-  }, 35000);
+  }, 75000);
 
   // Server sends back an empty string after client sends data
   it('should handle empty response gracefully (POST)', (done) => {
@@ -57,7 +57,7 @@ describe('Bad response', () => {
 
         done();
       });
-  }, 35000);
+  }, 75000);
 
   // Server sends back a malformed response ("foo bar") immediately upon connection
   it('should handle malformed response gracefully (GET)', (done) => {
@@ -77,7 +77,7 @@ describe('Bad response', () => {
 
         done();
       });
-  }, 35000);
+  }, 75000);
 
   // Server sends back a malformed response ("foo bar") after the client sends data
   it('should handle malformed response gracefully (POST)', (done) => {
@@ -97,5 +97,5 @@ describe('Bad response', () => {
 
         done();
       });
-  }, 35000);
+  }, 75000);
 });
