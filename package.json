@@ -1,6 +1,7 @@
 {
   "name": "@apiaryio/console-proxy",
   "version": "0.0.8-semantic-release",
+  "private": true,
   "publishConfig": {
     "registry": "https://registry.apiary-internal.com/"
   },
@@ -10,7 +11,7 @@
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.5.0",
     "classnames": "^2.2.5",
-    "condition-circle": "^1.5.0",
+    "condition-circle": "=1.5.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
