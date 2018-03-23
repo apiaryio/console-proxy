@@ -5,7 +5,7 @@ general:
 
 machine:
   node:
-    version: 7.9.0
+    version: 8.10.0
 
   hosts:
     api.xyz.com: 127.0.0.1
